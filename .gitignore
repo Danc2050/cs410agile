@@ -6,3 +6,6 @@
 
 # Ignore any .DS_Store files from Mac
 .DS_Store
+
+# Ignore any Python temp files
+__pycache__/
