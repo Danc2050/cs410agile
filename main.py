@@ -1,5 +1,6 @@
-from test_helpers import mock_input
+import pysftp
 import re
+from test_helpers import mock_input
 
 # =========================
 # SECTION: Global constants
@@ -17,6 +18,7 @@ if __name__ == "__main__":
 # ======================
 # SECTION: Input handler
 # ======================
+
 
 def read_user_input():
     raw_input = input(USER_PROMPT)
@@ -40,6 +42,19 @@ def read_user_input():
     tokens = re.findall(pattern, raw_input)
 
     return tokens
+
+
+# ===================
+# SECTION: Controller
+# ===================
+
+
+def main_loop(sftp: pysftp.Connection):
+    """Main controller loop. Asks the user for input, attempts to decipher
+    user input, and invoke the appropriate actions with the desired arguments.
+    """
+
+    return
 
 # ==============
 # SECTION: Tests
@@ -70,7 +85,8 @@ def test_input_length():
 
 def test_correct_tokenization():
     """Test that read_read_user_input() returns the correct tokenizations
-    for both simple and complex input cases."""
+    for both simple and complex input cases.
+    """
 
     # In order to reduce redundancy and make it easier to add test cases,
     # we'll define our test cases as a list, and we'll run each list item

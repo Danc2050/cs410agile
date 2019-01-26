@@ -9,7 +9,8 @@ import sys
 @contextmanager
 def mock_input(user_input: str):
     """When used with "with mock_input(mystring):", replaces stdin with
-    mystring to simulate user input (i.e. to mock stdin)."""
+    mystring to simulate user input (i.e. to mock stdin).
+    """
 
     # Save original stdin and replace it with a StringIO stream handler.
     orig = sys.stdin
