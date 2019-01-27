@@ -2,13 +2,22 @@ from app import controller
 from actions import login
 import pysftp
 import sys
+import getpass
 from tests import test_server
 
 if __name__ == "__main__":
     # Type test for valid pysftp.Connection object
     try:
         # Login attempt
-        sftp = login.login(test_server.HOSTNAME, test_server.USERNAME, test_server.PASSWORD)
+        len(sys.argv[1]) == 2
+        tup = sys.argv[2].split("@")
+        hostname = tup[0]
+        username = tup[1]
+        print(hostname+"@"+username+"'s", end=' ', flush=True)
+        password = getpass.getpass()
+        print(password)
+        sftp = login.login(hostname, username, password)
+
         # Type check
         if type(sftp) == pysftp.Connection:
             print("Authentication success.")
