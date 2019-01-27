@@ -9,11 +9,12 @@ if __name__ == "__main__":
     # Type test for valid pysftp.Connection object
     try:
         # Login attempt
-        len(sys.argv[1]) == 2
-        tup = sys.argv[2].split("@")
-        hostname = tup[0]
-        username = tup[1]
-        print(hostname+"@"+username+"'s", end=' ', flush=True)
+        if len(sys.argv) != 2:
+            print("# of arguments not satisfied.")
+        tup = sys.argv[1].split("@")
+        hostname = tup[1]
+        username = tup[0]
+        print(username+"@"+hostname+"'s", end=' ', flush=True)
         password = getpass.getpass()
         print(password)
         sftp = login.login(hostname, username, password)
