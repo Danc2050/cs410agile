@@ -4,35 +4,46 @@ import pysftp
 import sys
 import getpass
 
+INVALID_ARGUMENT_MESSAGE = \
+    "Invalid arguments. Please specify either hostname or user@hostname."
+
 if __name__ == "__main__":
 
-    # Type test for valid pysftp.Connection object
+    # TODO Write comment here
     try:
 
-        # Login attempt
+        # Check that we received exactly one command-line argument.
         if len(sys.argv) != 2:
-            print("Sftp program must take one valid argument.")
+            print(INVALID_ARGUMENT_MESSAGE)
             exit(1)
 
-        # Edge case for splitting the destination address if an '@'
-        # sign exists
+        # Split our one argument on "@", which will either give us
+        # a username and a hostname or just a hostname (if there is no "@").
         tup = sys.argv[1].split("@")
 
-        # If .split succeeds, a '@' is in the sftp destination
-        # and then the tuple returned will be {[user], [hostname]}
-        # Set each respective field to a local variable
-        if len(tup) == 2:
-            hostname = tup[1]
-            username = tup[0]
+        if len(tup) > 2 or len(tup) == 0:
+            # The user didn't pass in user@hostname or hostname, so we
+            # can't proceed. We'll print the correct invocation and exit
+            # so they can try again.
+            print(INVALID_ARGUMENT_MESSAGE)
+            exit(1)
 
-        # Otherwise, we need to get the host machines USER variable for username.
-        # The hostname will be inside sys.argv[1] (e.g., dylanlaufenberg.com)
-        else:
+        if len(tup) == 2:
+            # The user passed in user@hostname, so tup = [user, hostname].
+            username = tup[0]
+            hostname = tup[1]
+
+        else:  # len(tup) == 1
+            # The user passed in hostname only, so we'll retrieve
+            # the currently logged-in username from the OS.
             username = getpass.getuser()
             hostname = sys.argv[1]
 
-        # Printing credentials to user and asking for password from user
-        # getpass.getpass() does not echo the input... a security measure
+        # Print username@hostname and prompt for password.
+        # getpass.getpass() does not echo the input, as a security measure
+        #
+        # Note: if you run through PyCharm, getpass() may behave very oddly.
+        # It should work correctly from the terminal, though.
         print(username+"@"+hostname+"'s", end=' ', flush=True)
         password = getpass.getpass()
         sftp = login.login(hostname, username, password)
@@ -45,5 +56,5 @@ if __name__ == "__main__":
             sys.exit(controller.main_loop(sftp))
 
     except Exception as error:
-        print("pysftp object allocation error message: " + str(error.args))
+        # print(error)
         sys.exit(1)
