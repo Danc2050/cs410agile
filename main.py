@@ -6,15 +6,21 @@ import getpass
 from tests import test_server
 
 if __name__ == "__main__":
+    hostname = 0
+    username = 0
     # Type test for valid pysftp.Connection object
     try:
         # Login attempt
         if len(sys.argv) != 2:
             print("# of arguments not satisfied.")
         tup = sys.argv[1].split("@")
-        hostname = tup[1]
-        username = tup[0]
-        print(username+"@"+hostname+"'s", end=' ', flush=True)
+        if(len(tup) == 2): # if .split fails, then tup should == sys.argv
+            username = getpass.getuser()
+            print(username)
+        else:
+            hostname = tup[1]
+            username = tup[0]
+        print(username+"@"+hostname, end=' ', flush=True)
         password = getpass.getpass()
         print(password)
         sftp = login.login(hostname, username, password)
