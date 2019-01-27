@@ -55,5 +55,5 @@ if __name__ == "__main__":
             sys.exit(controller.main_loop(sftp))
 
     except Exception as error:
-        # print(error)
+        print(error)
         sys.exit(1)
