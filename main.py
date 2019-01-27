@@ -1,5 +1,4 @@
-from app import controller
-from actions import login
+from app import controller, login
 import pysftp
 import sys
 import getpass

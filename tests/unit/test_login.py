@@ -1,5 +1,5 @@
 import pysftp
-from actions import login
+from app import login
 from tests.test_server import HOSTNAME, USERNAME, PASSWORD
 import pytest
 import paramiko
