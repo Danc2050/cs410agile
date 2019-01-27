@@ -2,9 +2,9 @@ import pysftp
 from tests import test_server
 
 #Connect to Server
-def login(host, username, password):
+def login(HOST, USERNAME, PASSWORD):
     try:
-        sftp = pysftp.Connection(host =host, username=test_server.USERNAME, password=test_server.PASSWORD)
+        sftp = pysftp.Connection(host=HOST, username=USERNAME, password=PASSWORD)
     except Exception as error:
         print("Connection error message: " + str(error.args))
         return error

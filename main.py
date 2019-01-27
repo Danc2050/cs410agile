@@ -1,12 +1,13 @@
 from app import controller
+from actions import login
 import pysftp
 import sys
-from actions import login
+from tests import test_server
 
 if __name__ == "__main__":
 
     # Login attempt
-    sftp = login.login()
+    sftp = login.login(test_server.HOSTNAME, test_server.USERNAME, test_server.PASSWORD)
     # Type test for valid pysftp.Connection object
     try:
         if type(sftp) == pysftp.Connection:
