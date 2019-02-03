@@ -6,9 +6,9 @@ import getpass
 INVALID_ARGUMENT_MESSAGE = \
     "Invalid arguments. Please specify either hostname or user@hostname."
 
-if __name__ == "__main__":
 
-    # TODO Write comment here
+def main():
+    # Catch-all try block for attempting to run the program.
     try:
 
         # Check that we received exactly one command-line argument.
@@ -57,3 +57,7 @@ if __name__ == "__main__":
     except Exception as error:
         print(error)
         sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
