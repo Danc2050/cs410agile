@@ -1,4 +1,5 @@
 from app import controller, login
+from io import StringIO
 import pysftp
 import sys
 import getpass
@@ -56,6 +57,21 @@ def main():
 
     except Exception as error:
         print(error)
+
+        # Disable exception printing before exit. Note: this is super-janky
+        # and should never be used unless the program is about to close!
+        # We just flatly replace the standard error output with a buffer
+        # that we never read.
+        #
+        # We have to do this because pysftp raises an exception during
+        # teardown if it was passed garbage inputs like hamsandwich@beepboop.
+        # If we don't disable exception printing, Python prints a stack trace
+        # for an ignored exception. Why? We can't catch the exception,
+        # because when it's raised, we've already called sys.exit(), so
+        # we don't have any code in scope. There's nowhere for the exception
+        # to go.
+        sys.stderr = StringIO()
+
         sys.exit(1)
 
 

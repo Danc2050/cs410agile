@@ -62,3 +62,33 @@ def test_login_with_various_credentials(monkeypatch):
 
     # Return argv to its original value
     sys.argv = original_argv
+
+
+def test_bogus_credentials_dont_cause_pysftp_traceback_on_exit(
+        capsys,
+        monkeypatch
+):
+    """Test that providing bogus credentials like hamsandwich@beepboop,
+    which cause pysftp to raise an exception on teardown, doesn't cause
+    the exception to be printed to the user."""
+
+    # Backup original argv
+    original_argv = sys.argv
+
+    # Set up fake argv.
+    sys.argv = ['main.py', 'hamsandwich@beepboop']
+
+    # Mock the password request.
+    def mock_getpass():
+        return test_server.PASSWORD
+    monkeypatch.setattr(getpass, 'getpass', mock_getpass)
+
+    # Cause the exception to be ignored.
+    with pytest.raises(SystemExit):
+        main()
+
+    # Check that it didn't print.
+    assert 'Exception ignored' not in capsys.readouterr().err
+
+    # Return argv to its original value
+    sys.argv = original_argv
