@@ -1,27 +1,33 @@
 import pysftp
 import pytest
 import paramiko
+from actions import put_file_onto_remote_server as put
 
 
-# test what happens when you ask to transfer a file
-# which doesn't exist
-def test_no_file():
-    return 0
+def test_no_file(sftp):
+    """Test what happens when you ask to transfer a
+    file which doesn't exist.
+    """
+    with pytest.raises(OSError):
+        put.put(sftp, "snuggleSauce.txt")
 
 
-# test what happens when you give it a bad path
-def test_bad_path():
-    return 0
 
 
-# Count the number of files on disk and
-# remote server before the put operation
-def test_best_case():
-    return 0
+#def test_bad_path():
+    """Test what happens when you give it a bad path.
+    """
+    #return 0
 
 
-# Preform operation
+#def test_best_case():
+    """Count the number of files on disk and
+    remote server before the put operation
 
-# count after and insure that there is one less file
-# locally and one more on the server
+    Preform operation
 
+    count after and insure that there is one less file
+    locally and one more on the server
+    """
+
+ #   return 0
