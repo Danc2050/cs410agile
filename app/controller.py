@@ -2,6 +2,7 @@ from .input_handler import read_user_input
 import paramiko
 import paramiko.sftp_client
 import pysftp
+import put_file_on_remote_server as put
 
 # ===================
 # SECTION: Controller
@@ -39,6 +40,8 @@ def main_loop(sftp: pysftp.Connection) -> int:
                 # tests of the basic skeleton.
                 # TODO Replace this action handler when implementing remote ls.
                 sftp.listdir(".")
+            elif len(tokens) == 2 and tokens[0] == "put":
+                put.put(tokens[1])
             else:
                 print("That command is not recognized.")
 
