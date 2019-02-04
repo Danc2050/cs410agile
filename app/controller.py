@@ -42,7 +42,7 @@ def main_loop(sftp: pysftp.Connection) -> int:
                 sftp.listdir(".")
 
             # TODO Manual testing for each string is complete. However, do we want to make it a test?
-            elif len(tokens) == 1 and tokens[0].lower == "exit" or "bye" or "quit":
+            elif len(tokens) == 1 and tokens[0].lower() == "exit" or tokens[0].lower() == "bye" or tokens[0].lower() == "quit":
                 #  User wants to exit
                 print("\nConnection closed.")
                 close.close(sftp)
