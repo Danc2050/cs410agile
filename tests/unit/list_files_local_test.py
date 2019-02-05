@@ -43,6 +43,3 @@ def test_difference_in_output():
 	# If difference file is empty than the results are identical and test should pass
 	assert len(open('difference.txt').readlines()) == 0
 
-# Execute tests
-test_local_file_listing()
-test_difference_in_output()
