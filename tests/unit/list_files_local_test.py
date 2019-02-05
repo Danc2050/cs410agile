@@ -1,7 +1,9 @@
 import os
 import pytest
-from actions import list_files_local as display_local_files
+import imp
 
+#import actions directory module to list files
+display = imp.load_source('list_files_local',"../../actions/list_files_local.py")
 
 '''
 Tests to compare the output of python program to list files with
@@ -12,12 +14,14 @@ def test_local_file_listing():
 	# Path is assigned as the path of current working directory
 	path='.'
 
-	display_local_files()   
-
 	cmd = 'ls > test_output_file.txt'
 
 	#Execute the linux command to list the files and write it to a text file
 	os.system(cmd)
+
+
+	#Call python function to display list of files in current directory
+	display.display_local_files()   
 
 	#Compare results
 	assert len(open('test_output_file.txt').readlines()) == len(open('output_file.txt').readlines())
@@ -40,5 +44,5 @@ def test_difference_in_output():
 	assert len(open('difference.txt').readlines()) == 0
 
 # Execute tests
-#test_local_file_listing()
-#test_difference_in_output()
+test_local_file_listing()
+test_difference_in_output()
