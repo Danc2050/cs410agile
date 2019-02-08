@@ -15,7 +15,7 @@ def test_real_get():
 
 
 def test_get_with_invalid_paths():
-    """ Tests close() when NOT logged onto an active, authentic connection. Ideal behavior
+    """ Tests get() when NOT logged onto an active, authentic connection. Ideal behavior
          is returning an Exception with fake credentials.
     """
 
