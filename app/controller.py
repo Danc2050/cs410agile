@@ -1,7 +1,8 @@
 from .input_handler import read_user_input
 import pysftp
 from actions import close
-
+from actions import get
+import os
 
 # ===================
 # SECTION: Controller
@@ -47,6 +48,12 @@ def main_loop(sftp: pysftp.Connection) -> int:
                 print("\nConnection closed.")
                 close.close(sftp)
                 return
+            elif len(tokens) == 2 and tokens[0].lower() == "get":
+                #  User wants to exit
+                # print(sftp.pwd + "/" + tokens[1])
+                print("File is : " + sftp.listdir(os.path.dirname(tokens[1])))
+                get.get(sftp, "~" + sftp.listdir(os.path.dirname(tokens[1])), os.curdir)
+                # dir_path = os.path.dirname(os.path.realpath(__file__)))
             else:
                 print("That command is not recognized.")
 

@@ -53,7 +53,7 @@ def main():
             print("Authentication success.")
             # Run the main controller loop, and when it returns, pass along its
             # return value as the program's exit code.
-            exit(controller.main_loop(sftp))
+            sys.exit(controller.main_loop(sftp))
 
     except Exception as error:
         print(error)
