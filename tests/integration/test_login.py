@@ -42,21 +42,18 @@ def test_login_with_various_credentials(monkeypatch):
     sys.argv = ['main.py', test_server.USERNAME + '@' + test_server.HOSTNAME]
 
     # Verify that, on successful login, the controller returns RETVAL
-    with pytest.raises(SystemExit) as e:
-        main()
-        assert e.type == SystemExit
-        assert e.value.code == RETVAL
+    assert main() == RETVAL
 
     # SECTION: test 2 - unsuccessful login.
 
     # Set up fake argv.
     sys.argv = ['main.py', 'cs510fakeuser@' + test_server.HOSTNAME]
 
-    # Verify that main() returns a non-zero return code.
-    with pytest.raises(SystemExit) as e:
-        main()
-        assert e.type == SystemExit
-        assert e.value.code != 0
+    # Verify that main() returns a non-zero return code without
+    # invoking the controller.
+    main_return = main()
+    assert main_return != 0
+    assert main_return != RETVAL
 
     # SECTION: teardown.
 
@@ -84,8 +81,7 @@ def test_bogus_credentials_dont_cause_pysftp_traceback_on_exit(
     monkeypatch.setattr(getpass, 'getpass', mock_getpass)
 
     # Cause the exception to be ignored.
-    with pytest.raises(SystemExit):
-        main()
+    main()
 
     # Check that it didn't print.
     assert 'Exception ignored' not in capsys.readouterr().err

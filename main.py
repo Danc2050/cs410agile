@@ -15,7 +15,7 @@ def main():
         # Check that we received exactly one command-line argument.
         if len(sys.argv) != 2:
             print(INVALID_ARGUMENT_MESSAGE)
-            exit(1)
+            return 1
 
         # Split our one argument on "@", which will either give us
         # a username and a hostname or just a hostname (if there is no "@").
@@ -26,7 +26,7 @@ def main():
             # can't proceed. We'll print the correct invocation and exit
             # so they can try again.
             print(INVALID_ARGUMENT_MESSAGE)
-            exit(1)
+            return 1
 
         if len(tup) == 2:
             # The user passed in user@hostname, so tup = [user, hostname].
@@ -53,7 +53,7 @@ def main():
             print("Authentication success.")
             # Run the main controller loop, and when it returns, pass along its
             # return value as the program's exit code.
-            exit(controller.main_loop(sftp))
+            return controller.main_loop(sftp)
 
     except Exception as error:
         print(error)
@@ -72,8 +72,8 @@ def main():
         # to go.
         sys.stderr = StringIO()
 
-        sys.exit(1)
+        return 1
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
