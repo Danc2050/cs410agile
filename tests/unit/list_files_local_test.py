@@ -27,7 +27,7 @@ def test_local_file_listing():
 	assert len(open('test_output_file.txt').readlines()) == len(open('output_file.txt').readlines())
 
 def test_difference_in_output():
-    #Read the contents of file to Set datastructure
+    #Read the contents of file into Set datastructure
 	output = set((file.strip() for file in open("output_file.txt")))
 	output_test = set((file.strip() for file in open("test_output_file.txt")))
 
