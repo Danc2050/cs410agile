@@ -12,22 +12,12 @@ def test_no_file(sftp):
         put.put(sftp, "totes.not.fake.no.really")
 
 
-
-
-#def test_bad_path():
-    """Test what happens when you give it a bad path.
+def test_best_case(sftp):
+    """This tests what happens if you put a file that does exist on
+    to the remote server
     """
-    #return 0
+    put.put(sftp, "main.py")
 
 
-#def test_best_case():
-    """Count the number of files on disk and
-    remote server before the put operation
-
-    Preform operation
-
-    count after and insure that there is one less file
-    locally and one more on the server
-    """
 
  #   return 0
