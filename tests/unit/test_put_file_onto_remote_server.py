@@ -9,7 +9,7 @@ def test_no_file(sftp):
     file which doesn't exist.
     """
     with pytest.raises(OSError):
-        put.put(sftp, "snuggleSauce.txt")
+        put.put(sftp, "totes.not.fake.no.really")
 
 
 
