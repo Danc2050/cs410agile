@@ -40,7 +40,7 @@ def main_loop(sftp: pysftp.Connection) -> int:
                 # TODO Replace this action handler when implementing remote ls.
                 sftp.listdir(".")
             elif len(tokens) == 2 and tokens[0] == "put":
-                put_file_onto_remote_server.put(tokens[1])
+                put_file_onto_remote_server.put(sftp, tokens[1])
             else:
                 print("That command is not recognized.")
 
