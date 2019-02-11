@@ -6,4 +6,9 @@ import pysftp
 
 
 def put(sftp: pysftp.Connection, filename: str):
-    return sftp.put(filename, filename, preserve_mtime=False)
+    try:
+        sftp.put(filename, filename, preserve_mtime=False)
+
+    except FileNotFoundError:
+        print("Sorry, we couldn't find your file. Please check your spelling and try again")
+
