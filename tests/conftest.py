@@ -3,7 +3,7 @@ import pytest
 from tests.test_server import *
 
 
-@pytest.fixture(scope="package")
+@pytest.fixture(scope="function")
 def sftp():
     """This fixture provides a pysftp.Connection object that's shared
     across the entire tests package. If there's a problem connecting,
