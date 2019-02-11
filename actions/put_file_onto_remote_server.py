@@ -6,4 +6,4 @@ import pysftp
 
 
 def put(sftp: pysftp.Connection, filename: str):
-    return sftp.put(filename, preserve_mtime=True)
+    return sftp.put(filename, preserve_mtime=False)
