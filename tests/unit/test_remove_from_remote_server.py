@@ -1,14 +1,16 @@
-
 from actions import remove_from_remote_server as rm
+from actions import put_file_onto_remote_server as put
 
-REAL_FILE = "unicorns.py"
+REAL_FILE = "main.py"
 FAKE_FILE = "sadnessForever.txt"
 
+
 def remove_item_that_exists(sftp):
-    # TODO add something which automatically adds a file, so we can test deleting a file that is real
+    put(sftp, REAL_FILE)
     assert rm.remove_from_remote_server(REAL_FILE) is True
 
 
-def remove_item_that_does_not_exist(sftp):
+def remove_item_that_does_not_exist(sftp, capsys):
     assert rm.remove_from_remote_server(FAKE_FILE) is False
-    assert rm.ERROR_MESSAGE
+    assert put.ERROR_MESSAGE in capsys.readouterr().out
+
