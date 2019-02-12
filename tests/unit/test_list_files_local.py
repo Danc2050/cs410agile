@@ -21,6 +21,9 @@ def test_local_file_listing():
 	# README.md file should always be present in cs410agile project folder
 	filename="README.md"
 
+	# app directory should always be present in cs410agile project folder
+	dirname="app"
+	
 	# List file and directories in cs410agile project folder
 	path='.'
 
@@ -31,4 +34,4 @@ def test_local_file_listing():
 	output = stdout_string.getvalue().strip()
 
 	# Checks if README.md is in output list
-	assert filename in output
+	assert filename in output and dirname in output
