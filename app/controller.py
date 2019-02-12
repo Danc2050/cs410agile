@@ -41,7 +41,6 @@ def main_loop(sftp: pysftp.Connection) -> int:
             elif len(tokens) == 2 and tokens[0] == "put":
                 put_file_onto_remote_server.put(sftp, tokens[1])
             elif len(tokens) == 2 and tokens[0] == "get":
-                from actions import get_file_from_remote_server  # unresolved without this import. Why though...
                 get_file_from_remote_server.get(sftp, tokens[1])
             elif len(tokens) == 1 \
                     and (tokens[0].lower() == "exit"
