@@ -14,4 +14,4 @@ def test_best_case(sftp):
     """This tests what happens if you get a file that does exist on
     the remote server
     """
-    assert get.get(sftp, "README.md") is True
+    assert get.get(sftp, "main.py") is True

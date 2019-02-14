@@ -10,10 +10,17 @@ def get(sftp, remote_file_name):
     """
     local_file_path = os.curdir + '/' + remote_file_name
 
+    # Check if file exists locally first
+    if os.path.isfile(local_file_path):
+        local_file_exists = True
+    else:
+        local_file_exists = False
+
     try:
         sftp.get(remote_file_name, local_file_path, callback=None)
         return True
     except FileNotFoundError:
-        os.remove(remote_file_name)  # Required because it will create the file locally if not found remotely
+        if not local_file_exists:  # Check to see if the file already exists locally or not
+            os.remove(remote_file_name)  # Required because it will create the file locally if not found remotely
         print(ERROR_MESSAGE)
         return False
