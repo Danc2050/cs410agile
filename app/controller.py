@@ -38,7 +38,8 @@ def main_loop(sftp: pysftp.Connection) -> int:
                 # Barebones remote "ls" support to let us write meaningful
                 # tests of the basic skeleton.
                 # TODO Replace this action handler when implementing remote ls.
-                #sftp.listdir(".")
+                sftp.listdir(".")
+            elif len(tokens) == 1 and tokens[0].lower() == "lls":
                 listl.display_local_files()
             elif len(tokens) == 2 and tokens[0] == "put":
                 put_file_onto_remote_server.put(sftp, tokens[1])
