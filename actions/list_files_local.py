@@ -1,10 +1,11 @@
 #import required modules
 import os
 
-'''
-	Method to display the files in current directory.
-'''
 def display_local_files():
+	"""
+        	Method to display the files in current directory.
+	"""
+	
 	#Path is set to current working directory
 	path='.'
 
