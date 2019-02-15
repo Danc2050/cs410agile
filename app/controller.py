@@ -1,5 +1,6 @@
 from .input_handler import read_user_input
 from actions import *
+from actions import list_files_local as listl
 import pysftp
 
 # ===================
@@ -37,7 +38,8 @@ def main_loop(sftp: pysftp.Connection) -> int:
                 # Barebones remote "ls" support to let us write meaningful
                 # tests of the basic skeleton.
                 # TODO Replace this action handler when implementing remote ls.
-                sftp.listdir(".")
+                #sftp.listdir(".")
+                listl.display_local_files()
             elif len(tokens) == 2 and tokens[0] == "put":
                 put_file_onto_remote_server.put(sftp, tokens[1])
             elif len(tokens) == 1 \
