@@ -10,6 +10,7 @@ INVALID_ARGUMENT_MESSAGE = \
 
 def main():
     # Catch-all try block for attempting to run the program.
+
     try:
 
         # Check that we received exactly one command-line argument.
