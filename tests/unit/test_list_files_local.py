@@ -6,16 +6,16 @@ import contextlib
 from io import StringIO
 from actions import list_files_local as display
 
-'''
+"""
 	Test to check if the specific file is displayed while listing the 
 	files and directories on local machine.
-'''
+"""
 def test_local_file_listing():
-	'''
+	"""
 		Standard output of files is redirected and stored in stdout_string
 		and checked if README.md file is listed while listing local files and
 		directories
-	'''
+	"""
 	stdout_string = StringIO()
 
 	# README.md file should always be present in cs410agile project folder
