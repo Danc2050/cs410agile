@@ -3,35 +3,26 @@ import pytest
 import imp
 import paramiko
 import contextlib
-from io import StringIO
 from actions import list_files_local as display
 
-"""
+
+def test_local_file_listing(capsys):
+	"""
 	Test to check if the specific file is displayed while listing the 
 	files and directories on local machine.
-"""
-def test_local_file_listing():
 	"""
-		Standard output of files is redirected and stored in stdout_string
-		and checked if README.md file is listed while listing local files and
-		directories
-	"""
-	stdout_string = StringIO()
-
-	# README.md file should always be present in cs410agile project folder
-	filename="README.md"
-
-	# app directory should always be present in cs410agile project folder
-	dirname="app"
 	
-	# List file and directories in cs410agile project folder
-	path='.'
+	# Display the local files; we'll test the output against known values.
+	display.display_local_files()
 
-	# Redirect standard output and store it as a list
-	with contextlib.redirect_stdout(stdout_string):
-		display.display_local_files()
+	# Save the captured stdout output so we can check against it
+	# multiple times.
+	output = capsys.readouterr().out
 
-	output = stdout_string.getvalue().strip()
+	# List of files to search for. We'll use one file and one folder
+	# that should definitely be there.
+	files_to_find = ["README.md", "app"]
 
-	# Checks if README.md is in output list
-	assert filename in output and dirname in output
+	# Check for each file in the output.
+	for file in files_to_find:
+		assert file in output
