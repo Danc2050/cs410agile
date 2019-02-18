@@ -1,3 +1,4 @@
+import os
 from actions import get_file_from_remote_server as get
 
 
@@ -25,3 +26,5 @@ def test_best_case(sftp):
 
     # Test getting file
     assert get.get(sftp, "test.txt") is True
+
+    os.remove('test.txt')
