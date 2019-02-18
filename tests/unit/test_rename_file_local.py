@@ -3,7 +3,7 @@ import pytest
 import imp
 import paramiko
 import contextlib
-from actions import rename_files_local as rename
+from actions import rename_files_local 
 
 
 def test_local_file_rename():
@@ -26,7 +26,15 @@ def test_local_file_rename():
 	if not os.path.isfile(file_test):
 		open(file_test, 'a').close()
 	# Call rename action to reanme filr from file_test to renamed_file
-	rename.rename_local_file(file_test,renamed_file)
+	rename_files_local.rename_local_file(file_test,renamed_file)
 
 	# Assert true if renamed_file is present on file path
-	assert os.path.isfile(renamed_file)
+	assert os.path.isfile(renamed_file) 
+
+	# Assert true if file_test is no longer present on file path
+	# i.e., file_test is reanmed to renamed_file
+	assert os.path.isfile(file_test) == False
+
+	# Clean-up
+	os.remove(renamed_file)
+
