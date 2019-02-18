@@ -2,5 +2,6 @@
 
 __all__ = [
     "close",
-    "put_file_onto_remote_server"
+    "put_file_onto_remote_server",
+    "rename_files_local"
 ]
