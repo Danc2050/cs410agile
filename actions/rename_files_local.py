@@ -1,12 +1,15 @@
 #import required modules
 import os
 
-'''
-	Method to re=name a file in current directory.
-'''
+
 def rename_local_file(before,after):
+	'''
+	Method to rename a file in current directory.
+	'''
+
 	#Path is set to current working directory
 	path='.'
+
 	# Check if file is present on the current path
 	if os.path.isfile(before):
 		# Rename file name from rename.txt to renamed.txt
@@ -16,5 +19,3 @@ def rename_local_file(before,after):
 		print("Sorry! File: " + before +" doesn't exist.")
 		print("Please check the file name and try again later")
 	
-
-rename_local_file('rename.txt','renamed.txt')
