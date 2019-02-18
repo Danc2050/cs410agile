@@ -1,4 +1,5 @@
 from .input_handler import read_user_input
+from actions import *
 import pysftp
 from actions import close
 from actions import list_commands
@@ -40,11 +41,13 @@ def main_loop(sftp: pysftp.Connection) -> int:
                 # tests of the basic skeleton.
                 # TODO Replace this action handler when implementing remote ls.
                 sftp.listdir(".")
-
             elif len(tokens) == 1 and tokens[0] == "?":
                 # If there is only one
                 list_commands.list_commands()
-
+            elif len(tokens) == 1 and tokens[0].lower() == "lls":
+                list_files_local.display_local_files()
+            elif len(tokens) == 2 and tokens[0] == "put":
+                put_file_onto_remote_server.put(sftp, tokens[1])
             elif len(tokens) == 1 \
                     and (tokens[0].lower() == "exit"
                          or tokens[0].lower() == "bye"
