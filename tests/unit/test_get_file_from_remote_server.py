@@ -14,4 +14,14 @@ def test_best_case(sftp):
     """This tests what happens if you get a file that does exist on
     the remote server
     """
-    assert get.get(sftp, "main.py") is True
+
+    # Create file locally
+    f = open('test.txt', 'w')
+    f.write('testing')
+    f.close()
+
+    # Put file on the remote server
+    sftp.put('test.txt', 'test.txt', preserve_mtime=False)
+
+    # Test getting file
+    assert get.get(sftp, "test.txt") is True
