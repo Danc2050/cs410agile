@@ -3,7 +3,7 @@ from app.controller import main_loop
 import pysftp
 from tests.test_helpers import mock_input
 
-# Arbitrary string that we'll print inside mock_put()
+# Arbitrary string that we'll print inside mock_rm()
 # and check for in our tests.
 SUCCESS_STRING = "mock_rm CALLED"
 
@@ -12,7 +12,7 @@ FILENAME = "filename"
 
 
 def mock_rm(sftp:pysftp.Connection, filename: str):
-    """A fake put() function that checks the arguments and prints a string we
+    """A fake remove_from_remote_server() function that checks the arguments and prints a string we
     can check for, to verify that the function was called.
     """
 
