@@ -14,4 +14,3 @@ def put(sftp: pysftp.Connection, filename: str):
     except FileNotFoundError:
         print(ERROR_MESSAGE)
         return False
-
