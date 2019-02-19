@@ -35,5 +35,7 @@ def put_r(sftp: pysftp.Connection, foldername: str):
         return True
 
     except OSError:
+        # IF an error occurs at this line, the put_r failed, and we need to remove the previous directory.
         print(ERROR_MESSAGE)
+        sftp.rmdir(foldername)
         return False
