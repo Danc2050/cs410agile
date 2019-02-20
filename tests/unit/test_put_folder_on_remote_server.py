@@ -14,3 +14,7 @@ def test_best_case(sftp):
     to the remote server
     """
     assert put_folder.put_r(sftp, "folder") is True
+    # Cleanup of test case.
+    sftp.remove("text.txt")
+    sftp.chdir("..")
+    sftp.rmdir("folder")
