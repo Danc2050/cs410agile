@@ -41,6 +41,8 @@ def main_loop(sftp: pysftp.Connection) -> int:
             elif len(tokens) == 2 and tokens[0] == "rm":
                 #Using "rm" as remove
                 remove_from_remote_server.remove_from_remote_server(sftp, tokens[1])
+            elif len(tokens) == 1 and tokens[0].lower() == "lls":
+                list_files_local.display_local_files()
             elif len(tokens) == 2 and tokens[0] == "put":
                 put_file_onto_remote_server.put(sftp, tokens[1])
             elif len(tokens) == 1 \
