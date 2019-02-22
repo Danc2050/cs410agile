@@ -2,8 +2,10 @@ from app import controller, login
 from io import StringIO
 import pysftp
 import sys
-import rmdir
-#import actions import *   # Unable to import
+from tests.test_server import test_server
+from actions import *
+
+
 
 #from tests.test_server import test_server
 #from tests import test_server
@@ -18,8 +20,8 @@ def del_existing_dir(test_connection, directory):
         test_connection.mkdir(directory, mode=777)                 # add a directory
         test_connection.rmdir(directory)
         return test_connection.listdir()
-    except IOError
-        return IOError
+    except IOError:
+        return "IOError"
 
 # TEST 2: Directory does not exist
 def del_no_existing_file(test_connection, directory):
@@ -27,7 +29,7 @@ def del_no_existing_file(test_connection, directory):
         test_connection.rmdir(directory)
         return True
     except IOError:
-        return IOError
+        return "IOError"
 
 # TEST 3: Directory has content
 def content_dir(test_connection, directory):
@@ -42,7 +44,7 @@ def content_dir(test_connection, directory):
         test_connection.rmdir(directory)
         return True
     except IOError:
-        return IOError
+        return "IOError"
 
 # Testing method
 def test(got, expected):
