@@ -35,17 +35,11 @@ def main_loop(sftp: pysftp.Connection) -> int:
             if len(tokens) == 0:
                 continue
             elif len(tokens) == 1 and tokens[0].lower() == "ls":
-                # Barebones remote "ls" support to let us write meaningful
-                # tests of the basic skeleton.
-                # TODO Replace this action handler when implementing remote ls.
-                sftp.listdir(".")
+                print(listdir.list_dir(sftp))
             elif len(tokens) == 2 and tokens[0] == "put":
                 put_file_onto_remote_server.put(sftp, tokens[1])
             elif len(tokens) == 3 and tokens[0] == "put" and tokens[1] == "-r":
-                print("YES")
                 put_folder_on_remote_server.put_r(sftp, tokens[2])
-                print(os.curdir)
-                sftp.listdir(".")
             elif len(tokens) == 1 \
                     and (tokens[0].lower() == "exit"
                          or tokens[0].lower() == "bye"
