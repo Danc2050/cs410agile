@@ -34,10 +34,10 @@ def put_r(sftp: pysftp.Connection, foldername: str):
         # 4) copy contents of local directory into remote directory
         sftp.put_r(foldername, ".", preserve_mtime=False)
     except FileNotFoundError as error:
-        print(error)
         sftp.chdir("..")
         # remove folder created on remote if there is no such folder on local machine.
         sftp.rmdir(foldername)
+        print(ERROR_MESSAGE)
         return False
     # if everything went fine, then the folder's contents have been copied. Return True.
     return True
