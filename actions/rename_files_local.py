@@ -1,6 +1,7 @@
 #import required modules
 import os
 
+ERROR_MESSAGE = "Couldn't rename file! Please check the file name and try again later."
 
 def rename_local_file(before,after):
 	'''
@@ -9,13 +10,15 @@ def rename_local_file(before,after):
 
 	#Path is set to current working directory
 	path='.'
-
 	# Check if file is present on the current path
-	if os.path.isfile(before):
+	try:
 		# Rename file name from rename.txt to renamed.txt
 		os.rename(before,after)
-	# Else display a user-friendly message to retry with the valid file name
-	else:
-		print("Sorry! File: " + before +" doesn't exist.")
-		print("Please check the file name and try again later")
-	
+		return True
+	except FileNotFoundError:
+		print(ERROR_MESSAGE)
+		return False
+	except OSError:
+		print("You might not have permissions to rename this file.")
+		print("Please check permissions and try again.")
+		return False
