@@ -7,7 +7,7 @@ def test_no_folder(sftp, capsys):
     """
 
     assert put_folder.put_r(sftp, "fake") is False
-    #assert put_folder.ERROR_MESSAGE in capsys.readouterr().out # Does not work.
+    assert put_folder.ERROR_MESSAGE in capsys.readouterr().out
 
 def test_best_case(sftp):
     """This tests what happens if you put a folder that does exist on
