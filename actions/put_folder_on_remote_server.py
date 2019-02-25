@@ -1,7 +1,7 @@
 import pysftp
 
 ERROR_MESSAGE = "Sorry, we couldn't find your folder locally. Please check your spelling and try again"
-
+PERMISSION_ERROR = "You do not have the proper permissions for this directory."
 
 def put_r(sftp: pysftp.Connection, foldername: str):
     """ There is a lot wrong with the pysftp imlementation of put_r. It:
@@ -38,6 +38,9 @@ def put_r(sftp: pysftp.Connection, foldername: str):
         # remove folder created on remote if there is no such folder on local machine.
         sftp.rmdir(foldername)
         print(ERROR_MESSAGE)
+        return False
+    except PermissionError:
+        print(PERMISSION_ERROR)
         return False
     # if everything went fine, then the folder's contents have been copied. Return True.
     return True
