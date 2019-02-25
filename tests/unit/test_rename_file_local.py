@@ -32,3 +32,27 @@ def test_local_file_rename():
 	# Clean-up
 	os.remove(renamed_file)
 
+
+def test_local_different_file_names(capsys):
+	"""
+		Test to check if lrename can handle invalid filenames, empty string filename,
+		file not present etc.
+	"""
+	cases = [
+	    ("http://www.google.com", "after.txt"),
+	    ("","after.txt"),
+	    ("before.txt",""),
+	    ("before.txt","http://www.google.com"),
+	    ("before.txt","folder")
+	]
+	for before, after in cases:
+		assert rename_files_local.rename_local_file(before, after) is False
+		assert rename_files_local.ERROR_MESSAGE in capsys.readouterr().out
+		
+
+
+
+
+  
+
+
