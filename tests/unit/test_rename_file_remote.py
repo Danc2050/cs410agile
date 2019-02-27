@@ -33,7 +33,7 @@ def test_remote_file_rename(sftp):
 	sftp.remove(renamed_file)
 	
 
-def test_remote_different_file_names(sftp,capsys):
+def test_remote_rename_file_names(sftp,capsys):
 	"""
 		Test to check if pysftp.rename can handle invalid filenames, empty string filename,
 		file not present etc.
