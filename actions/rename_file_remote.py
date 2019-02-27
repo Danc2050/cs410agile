@@ -6,14 +6,15 @@ ERROR_MESSAGE = "Couldn't rename file! Please check the file name and try again 
 
 def rename_remote_file(sftp: pysftp.Connection, before:str, after:str):
 	'''
-	Method to rename a file in current directory.
+	Method to rename a file on remote server.
 	'''
 
 	#Path is set to current working directory
 	path='.'
-	# Check if file is present on the current path
+	
 	try:
-		# Rename file name from rename.txt to renamed.txt
+		# Rename file name from rename.txt to renamed.txt on remote server
+		# If rename is unsuccessful, then None is returned
 		sftp.rename(before,after)
 		return True
 	except IOError:
