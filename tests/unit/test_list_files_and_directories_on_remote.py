@@ -1,4 +1,7 @@
 from actions import listdir as listD
+import pytest
+import paramiko
+from paramiko import sftp_client
 
 
 def test_list(sftp, capsys):
@@ -22,3 +25,11 @@ def test_list(sftp, capsys):
     sftp.rmdir('listFolder')
     assert file_exists is True
     assert folder_exists is True
+
+def test_permission(sftp):
+    # Changes into the directory that we do not have permission to (/home)
+    sftp.chdir("..")
+    with pytest.raises(paramiko.sftp_client.SFTP_PERMISSION_DENIED):
+        listD.list_dir(sftp)
+#assert listD.list_dir(sftp) PermissionError
+#    raise IOError(errno.EACCES, text)
