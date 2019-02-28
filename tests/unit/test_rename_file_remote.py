@@ -19,7 +19,7 @@ def test_remote_file_rename(sftp):
 	renamed_file='renamed.txt'
 
 	# Create a file to rename on the remote server
-	sftp.open(file_test, mode='a+')
+	sftp.open(file_test, mode='a+').close()
 	# Call rename action to rename file from file_test to renamed_file
 	rename_display.rename_remote_file(sftp, file_test, renamed_file)
 
@@ -49,4 +49,4 @@ def test_remote_rename_file_names(sftp,capsys):
 		# return type of pysftp rename function is None
 		assert rename_display.rename_remote_file(sftp, before, after) is None
 		# cases should raise IO Error
-		assert rename_display.IO_ERROR_MESSAGE in capsys.readouterr().out
+		assert rename_display.ERROR_PREFACE in capsys.readouterr().out
