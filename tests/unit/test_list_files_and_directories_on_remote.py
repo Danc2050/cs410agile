@@ -14,22 +14,31 @@ def test_list(sftp, capsys):
        such a list exists.
     """
 
-    file_exists = False
-    folder_exists = False
-    sftp.makedirs('listFolder')
-    for file in listD.list_dir(sftp):
-        if file == '.emacs':
-            file_exists = True
-        if file == 'listFolder':
-            folder_exists = True
-    sftp.rmdir('listFolder')
-    assert file_exists is True
-    assert folder_exists is True
+    # Test file and folder that should be listed
+    file = 'fakeFile'
+    folder = 'listFolder'
+
+    # Create the file and folder
+    sftp.open(file, "a").close()
+    sftp.makedirs(folder)
+
+    # Retrieve our listing
+    listD.list_dir(sftp)
+
+    # Clean up after ourselves before asserting, since a failed assertion will stop the test and prevent clean-up
+    sftp.rmdir(folder)
+    sftp.remove(file)
+
+    # Then check whether we listed the test file and folder.
+    output = capsys.readouterr().out
+    assert file in output
+    assert folder in output
 
 def test_permission(sftp):
     # Changes into the directory that we do not have permission to (/home)
     sftp.chdir("..")
-    with pytest.raises(paramiko.sftp_client.SFTP_PERMISSION_DENIED):
+    with pytest.raises(OSError):
+    #paramiko.sftp_client.SFTP_PERMISSION_DENIED):
         listD.list_dir(sftp)
 #assert listD.list_dir(sftp) PermissionError
 #    raise IOError(errno.EACCES, text)

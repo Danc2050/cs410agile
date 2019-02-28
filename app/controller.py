@@ -35,7 +35,7 @@ def main_loop(sftp: pysftp.Connection) -> int:
             if len(tokens) == 0:
                 continue
             elif len(tokens) == 1 and tokens[0].lower() == "ls":
-                print(listdir.list_dir(sftp))
+                listdir.list_dir(sftp)
             elif len(tokens) == 2 and tokens[0] == "put":
                 put_file_onto_remote_server.put(sftp, tokens[1])
             elif len(tokens) == 1 \
@@ -48,6 +48,8 @@ def main_loop(sftp: pysftp.Connection) -> int:
                 return 0
             else:
                 print("That command is not recognized.")
+
+
 
     except AttributeError as e:
         if "open_session" in str(e):
