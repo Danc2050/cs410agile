@@ -17,5 +17,5 @@ def rename_remote_file(sftp: pysftp.Connection, before:str, after:str):
 		sftp.rename(before,after)
 		return True
 	except OSError as e:
-    	print(ERROR_PREFACE, e.strerror)
+		print(ERROR_PREFACE, e.strerror)
 		return False

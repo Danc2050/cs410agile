@@ -47,6 +47,6 @@ def test_remote_rename_file_names(sftp,capsys):
 	]
 	for before, after in cases:
 		# return type of pysftp rename function is None
-		assert rename_display.rename_remote_file(sftp, before, after) is None
+		assert rename_display.rename_remote_file(sftp, before, after) is False
 		# cases should raise IO Error
 		assert rename_display.ERROR_PREFACE in capsys.readouterr().out
