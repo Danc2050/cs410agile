@@ -1,1 +1,0 @@
-This is here to test if put_folder_on_remote_server works correctly.
