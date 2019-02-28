@@ -1,7 +1,7 @@
 #import required modules
 import pysftp
 
-ERROR_MESSAGE = "Couldn't rename file! Please check the file name and try again later."
+ERROR_PREFACE = "Error:"
 
 def rename_remote_file(sftp: pysftp.Connection, before:str, after:str):
 	'''
