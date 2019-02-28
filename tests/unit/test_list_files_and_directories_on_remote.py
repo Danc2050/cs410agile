@@ -12,7 +12,13 @@ def test_list(sftp, capsys):
     """
 
     file_exists = False
+    folder_exists = False
+    sftp.makedirs('listFolder')
     for file in listD.list_dir(sftp):
         if file == '.emacs':
             file_exists = True
+        if file == 'listFolder':
+            folder_exists = True
+    sftp.rmdir('listFolder')
     assert file_exists is True
+    assert folder_exists is True
