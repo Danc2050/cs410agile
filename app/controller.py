@@ -48,6 +48,8 @@ def main_loop(sftp: pysftp.Connection) -> int:
                 list_files_local.display_local_files()
             elif len(tokens) == 2 and tokens[0] == "put":
                 put_file_onto_remote_server.put(sftp, tokens[1])
+            elif len(tokens) == 2 and tokens[0] == "mkdir":
+                create_directory_on_remote.create_dir_remote(sftp, tokens[1])
             elif len(tokens) == 1 \
                     and (tokens[0].lower() == "exit"
                          or tokens[0].lower() == "bye"
