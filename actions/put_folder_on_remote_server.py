@@ -42,5 +42,8 @@ def put_r(sftp: pysftp.Connection, foldername: str):
     except PermissionError:
         print(PERMISSION_ERROR)
         return False
-    # if everything went fine, then the folder's contents have been copied. Return True.
+    except OSError as e:
+        print("Error:", e.strerror)
+        return False
+    # if everything went fine, then the folder's contents have been copied. Return True.EPyhcYXJtrSgm7zi
     return True
