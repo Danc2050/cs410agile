@@ -16,6 +16,7 @@ def put_r(sftp: pysftp.Connection, foldername: str):
     2. create a remote directory of the local folder name we want to copy if it does not exist.
     3. manually step into that remote directory (so no error is thrown).
     4. then call pysftp's put_r function to copy the local contents.
+    5. finally, step out of the remote directory.
 
     ***Notes***:
         * if there is no such file on the local machine, we must remove the folder we created in the exception block.
@@ -33,6 +34,9 @@ def put_r(sftp: pysftp.Connection, foldername: str):
             sftp.chdir(foldername)
         # 4) copy contents of local directory into remote directory
         sftp.put_r(foldername, ".", preserve_mtime=False)
+
+        # 5) change out of the remote directory.
+        sftp.chdir("..")
     except FileNotFoundError as error:
         sftp.chdir("..")
         # remove folder created on remote if there is no such folder on local machine.

@@ -1,1 +1,0 @@
-This is here to test if one file is removed correctly.
