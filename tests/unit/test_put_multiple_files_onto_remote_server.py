@@ -16,6 +16,15 @@ def test_best_case(sftp):
     to the remote server
     """
 
-    files = ["main.py", "README.md"]
+    files = ["test_close.py", "test_login.py"]
+    assert put.put_multiple(sftp, files, len(files)) is True
+
+
+def test_some_valid_files(sftp):
+    """This tests what happens if you put a file that does exist on
+    to the remote server
+    """
+
+    files = ["test_login.py", "not.a.real.file"]
     assert put.put_multiple(sftp, files, len(files)) is True
 
