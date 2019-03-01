@@ -42,7 +42,7 @@ def main_loop(sftp: pysftp.Connection) -> int:
                 # TODO Replace this action handler when implementing remote ls.
                 sftp.listdir(".")
             elif len(tokens) == 2 and tokens[0] == "rm":
-                #Using "rm" as remove
+                # Using "rm" as remove
                 remove_from_remote_server.remove_from_remote_server(sftp, tokens[1])
             elif len(tokens) == 1 and tokens[0] == "?":
                 # If there is only one
