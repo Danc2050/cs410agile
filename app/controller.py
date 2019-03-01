@@ -42,6 +42,8 @@ def main_loop(sftp: pysftp.Connection) -> int:
                 list_files_local.display_local_files()
             elif len(tokens) == 2 and tokens[0] == "put":
                 put_file_onto_remote_server.put(sftp, tokens[1])
+            elif len(tokens) > 2 and tokens[0] == "put":
+                put_multiple_files_onto_remote_server.put_multiple(sftp, tokens, len(tokens))
             elif len(tokens) == 2 and tokens[0] == "get":
                 get_file_from_remote_server.get(sftp, tokens[1])
             elif len(tokens) == 1 \
