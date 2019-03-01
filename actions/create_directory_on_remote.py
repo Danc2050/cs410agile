@@ -1,7 +1,7 @@
 import pysftp
 
 
-ERROR_PREFACE = "Error:" 
+ERROR_PREFACE = "Encountered problem while creating directory. Error:" 
 
 def create_dir_remote(sftp: pysftp.Connection, remotepath: str):
     try:
