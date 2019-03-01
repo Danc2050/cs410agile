@@ -40,6 +40,10 @@ def test_invalid_commands_do_not_invoke_rm_function(capsys, sftp):
     """Tests that writing invalid commands doesn't invoke the rm action."""
 
     # See tests/integration/test_close.py for details.
-    with mock_input("putty"):
+    test_cases = """rm
+                    rm one two
+                 """
+    with mock_input(test_cases):
         main_loop(sftp)
-        assert "not recognized" in capsys.readouterr().out
+        assert SUCCESS_STRING not in capsys.readouterr().out
+
