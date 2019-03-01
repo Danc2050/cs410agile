@@ -1,4 +1,5 @@
 import pysftp
+from actions import put_file_onto_remote_server as put_f
 
 ERROR_MESSAGE = "Sorry, we couldn't find your folder locally. Please check your spelling and try again"
 PERMISSION_ERROR = "You do not have the proper permissions for this directory."
@@ -24,6 +25,10 @@ def put_r(sftp: pysftp.Connection, foldername: str):
     """
 
     try:
+        # Tests if the file is a file, not a directory. This avoids NotADirectory error.
+        if sftp.isfile(foldername):
+            return put_f.put(sftp, foldername)
+
         # 1) Change into the remote directory, if it exists.
         try:
             sftp.chdir(foldername)
