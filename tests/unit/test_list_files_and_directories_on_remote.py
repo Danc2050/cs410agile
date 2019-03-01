@@ -38,7 +38,4 @@ def test_permission(sftp):
     # Changes into the directory that we do not have permission to (/home)
     sftp.chdir("..")
     with pytest.raises(OSError):
-    #paramiko.sftp_client.SFTP_PERMISSION_DENIED):
         listD.list_dir(sftp)
-#assert listD.list_dir(sftp) PermissionError
-#    raise IOError(errno.EACCES, text)
