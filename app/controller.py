@@ -9,17 +9,18 @@ from actions import list_commands
 # SECTION: Controller
 # ===================
 
+ERROR_MESSAGE_NOT_RECOGNIZED = "That command is not recognized."
+
 
 def main_loop(sftp: pysftp.Connection) -> int:
     """Main controller loop. Asks the user for input, attempts to decipher
     user input, and invoke the appropriate actions with the desired arguments.
     """
 
-    # Catch disconnects & no connection errors.
-    try:
-        # Main control loop.
-        while True:
-
+    # Main control loop.
+    while True:
+        # Catch disconnects, no connection errors, and pysftp's raised exceptions.
+        try:
             # First, we take in a command sequence from the user.
             try:
                 tokens = read_user_input()
@@ -57,13 +58,25 @@ def main_loop(sftp: pysftp.Connection) -> int:
                 close.close(sftp)
                 return 0
             else:
-                print("That command is not recognized.")
+                print(ERROR_MESSAGE_NOT_RECOGNIZED)
 
-    except AttributeError as e:
-        if "open_session" in str(e):
-            # The connection has been severed or a command was attempted
-            # while no connection was active.
-            print("The connection was closed unexpectedly.")
-            return -1
-        else:
-            raise
+        except AttributeError as e:
+            if "open_session" in str(e):
+                # The connection has been severed or a command was attempted
+                # while no connection was active.
+                print("The connection was closed unexpectedly.")
+                return -1
+            else:
+                raise
+
+        except OSError as e:
+            # pysftp raises LOTS of OSErrors to communicate failed operations,
+            # but the library and program are still in a valid state afterward,
+            # so we can and should continue execution after displaying the
+            # failure messages.
+            #
+            # Any actions that need to provide special handling of OSErrors
+            # should catch OSError or appropriate subclasses and handle them
+            # internally, leaving this catch-all for errors that simply need
+            # to be displayed.
+            print("Error:", e.strerror)
