@@ -3,7 +3,7 @@ import os
 from actions import get_multiple_files_from_remote_server as get
 
 
-def test_no_file(sftp, capsys):
+def test_no_files(sftp, capsys):
     """Test what happens when you ask to transfer a
     file which doesn't exist.
     """
@@ -39,3 +39,23 @@ def test_best_case(sftp):
     os.remove('test.txt')
     os.remove('test2.txt')
 
+
+def test_some_good_files(sftp):
+    """This tests what happens if you put a file that does exist on
+    to the remote server
+    """
+
+    files = ['test.txt', 'test2.txt']
+
+    # Create files locally
+    f = open('test.txt', 'w')
+    f.write('testing')
+    f.close()
+
+    # Put files on the remote server
+    sftp.put('test.txt', 'test.txt', preserve_mtime=False)
+
+    # Test getting files
+    assert get.get_multiple(sftp, files, len(files)) is True
+
+    os.remove('test.txt')

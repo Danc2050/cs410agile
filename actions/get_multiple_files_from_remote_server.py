@@ -9,12 +9,10 @@ ERROR_MESSAGE = "Sorry, we couldn't find your file. Please check your spelling a
 def get_multiple(sftp: pysftp.Connection, filenames: [], num_files: int):
     success = False
 
-    for i in range(1, num_files):
+    for i in range(0, num_files):
         ret = get.get(sftp, filenames[i])
         if not ret:
             print("filename in question:" + filenames[i])
-            print()
-            continue
         else:
             success = True
 

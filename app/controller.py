@@ -45,7 +45,7 @@ def main_loop(sftp: pysftp.Connection) -> int:
             elif len(tokens) == 2 and tokens[0] == "get":
                 get_file_from_remote_server.get(sftp, tokens[1])
             elif len(tokens) > 2 and tokens[0] == "get":
-                get_multiple_files_from_remote_server.get_multiple(sftp, tokens, len(tokens))
+                get_multiple_files_from_remote_server.get_multiple(sftp, tokens[1:len(tokens)], len(tokens)-1)
             elif len(tokens) == 1 \
                     and (tokens[0].lower() == "exit"
                          or tokens[0].lower() == "bye"
