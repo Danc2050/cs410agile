@@ -1,5 +1,5 @@
 from actions import change_permissions_remote as change
-
+from actions import put_file_onto_remote_server as put
 
 # Permissions that need changes
 APPROVE = 0x0111
