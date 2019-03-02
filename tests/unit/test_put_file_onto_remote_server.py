@@ -1,10 +1,8 @@
-<<<<<<< HEAD
-=======
+
 from os import remove
 import pysftp
 import pytest
 import paramiko
->>>>>>> f5a66116a4ec615799f32e1e87d0780a1bbd1a7a
 from actions import put_file_onto_remote_server as put
 
 
@@ -15,7 +13,6 @@ def test_no_file(sftp, capsys):
 
     with pytest.raises(OSError):
         put.put(sftp, "totes.not.fake.no.really")
-
 
 
 def test_best_case(sftp):
