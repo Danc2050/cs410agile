@@ -9,5 +9,5 @@ def list_dir(sftp: pysftp.Connection):
     """
     for entry in sftp.listdir("."):
         if not entry.startswith('.'):
-            print(entry, end= '    ')
+            print(entry, end='    ')
     print()
