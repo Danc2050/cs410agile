@@ -2,7 +2,7 @@ from actions import change_permissions_remote as change
 
 
 # Permissions that need changes
-APPROVE = 4
+APPROVE = 0x0111
 REAL_FILE = "main.py"
 
 
@@ -15,13 +15,11 @@ def test_no_file(sftp, capsys):
 
 
 def test_restrictive_permissions_case(sftp):
-    """This tests what happens if you put a file that does exist on
-    to the remote server
+    """This tests if you try to change permissions on something you shouldn't
+    have access to
     """
-    sftp.put(sftp, REAL_FILE)
-    assert change.change_permissions(sftp, REAL_FILE, APPROVE) is True
+    assert change.change_permissions(sftp, "/home", APPROVE) is False
     # try to modify and verify it won't do anything
-    sftp.remove(sftp, REAL_FILE)
 
 
 def test_allowing_permissions_case(sftp):
