@@ -1,4 +1,4 @@
-from actions import listdir
+from actions import list_files_remote
 from app.controller import main_loop
 import pysftp
 from tests.test_helpers import mock_input
@@ -26,7 +26,7 @@ def test_put_file_invokes_put_function(monkeypatch, capsys, sftp):
     """
 
     # Replace the action with our mocked function
-    monkeypatch.setattr(listdir, "list_dir", mock_list_dir)
+    monkeypatch.setattr(list_files_remote, "list_dir", mock_list_dir)
 
     # Pass in a valid input
     with mock_input("ls"):

@@ -1,4 +1,4 @@
-from actions import listdir as listD
+from actions import list_files_remote as listD
 import pytest
 import paramiko
 from paramiko import sftp_client
