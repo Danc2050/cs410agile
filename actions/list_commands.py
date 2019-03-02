@@ -8,6 +8,7 @@ def list_commands():
         "lrename old new\t\trenames a file or folder from old to new\n"
         "ls\t\t\tlist files on remote machine\n"
         "put file\t\tput a file onto server\n"
+        "put file file ...\t\tputs multiple files onto server\n"
         "put -r folder\t\tput a folder onto server recursively\n"
         "quit\t\t\tclose the connection and exit\n"
         # "rm file\t\t\tremove file\n"

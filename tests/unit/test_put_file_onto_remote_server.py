@@ -15,6 +15,7 @@ def test_no_file(sftp, capsys):
         put.put(sftp, "totes.not.fake.no.really")
 
 
+
 def test_best_case(sftp):
     """This tests what happens if you put a file that does exist on
     to the remote server

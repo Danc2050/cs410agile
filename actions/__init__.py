@@ -6,5 +6,6 @@ __all__ = [
     "list_files_remote",
     "rename_files_local",
     "list_files_local",
-    "put_folder_on_remote_server"
+    "put_folder_on_remote_server",
+    "put_multiple_files_onto_remote_server"
 ]
