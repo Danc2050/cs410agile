@@ -47,7 +47,7 @@ def test_remote_create_directory_existing(sftp,capsys):
 
 	# Create a file and directory to rename on the remote server
 	sftp.open(file_test, mode='a+').close()
-	sftp.mkdir(dir_test, mode=777)
+	sftp.mkdir(dir_test, mode=755)
 	
 	# return type of pysftp rename function is boolean
 	assert mkdirectory.create_dir_remote(sftp, file_test) is False
