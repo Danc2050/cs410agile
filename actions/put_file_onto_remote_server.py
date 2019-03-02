@@ -12,7 +12,6 @@ def put(sftp: pysftp.Connection, filename: str):
     try:
         sftp.put(filename, filename, preserve_mtime=False)
         return True
-
     except OSError:
         if sftp.isdir(filename):
             # The file  we want to upload is a directory on remote.
