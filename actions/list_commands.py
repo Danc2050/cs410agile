@@ -6,7 +6,7 @@ def list_commands():
         "exit\t\t\tclose the connection and exit\n"
         "lls\t\t\tlist files on local machine\n"
         "lrename old new\t\trenames a file or folder from old to new\n"
-        # "ls\t\t\tlist files on remote machine\n"
+        "ls\t\t\tlist files on remote machine\n"
         "put file\t\tput a file onto server\n"
         "put -r folder\t\tput a folder onto server recursively\n"
         "quit\t\t\tclose the connection and exit\n"
