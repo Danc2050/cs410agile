@@ -13,8 +13,7 @@ def test_remote_create_directory(sftp):
 	"""
 
 	# Directory name to create
-	#dir_test='dir_test'
-	dir_test='directory_test'
+	dir_test = 'directory_test'
 
 	# Call mkdir function to create directory on remote server
 	mkdirectory.create_dir_remote(sftp, dir_test)
@@ -25,17 +24,23 @@ def test_remote_create_directory(sftp):
 	# Clean-up (remove newly created directory from remote server)
 	sftp.rmdir(dir_test)
 
+
 def test_remote_create_directory_invalid(sftp,capsys):
 	"""
 		Test to check if pysftp.mkdir can handle invalid directory names and 
 		empty string directory names.
 	"""
-	cases = ["http://www.google.com", "", ".", "/test_create_directory_invalid"]
+	cases = [
+		"http://www.google.com",
+		"",
+		".",
+		"/test_create_directory_invalid"
+	]
 	for dir_test in cases:
-		# return type of pysftp rename function is None
+		# Each case should fail and print an error message.
 		assert mkdirectory.create_dir_remote(sftp, dir_test) is False
-		# cases should raise OSError
 		assert mkdirectory.ERROR_PREFACE in capsys.readouterr().out
+
 
 def test_remote_create_directory_existing(sftp,capsys):
 	"""
@@ -48,22 +53,15 @@ def test_remote_create_directory_existing(sftp,capsys):
 	# Create a file and directory to rename on the remote server
 	sftp.open(file_test, mode='a+').close()
 	sftp.mkdir(dir_test, mode=755)
-	
-	# return type of pysftp rename function is boolean
+
+	# Test trying to create a directory that conflicts with an existing file
+	# or directory
 	assert mkdirectory.create_dir_remote(sftp, file_test) is False
-	# cases should raise OSError as file with same name already exists
 	assert mkdirectory.ERROR_PREFACE in capsys.readouterr().out
 
-	# return type of pysftp rename function is boolean
 	assert mkdirectory.create_dir_remote(sftp, dir_test) is False
-	# cases should raise OSError as directory with same name already exists
 	assert mkdirectory.ERROR_PREFACE in capsys.readouterr().out
 
-	# Clean-up (remove newly crteated file and directory from remote server)
+	# Clean-up (remove newly created file and directory from remote server)
 	sftp.remove(file_test)
 	sftp.rmdir(dir_test)
-
-
-
-
-	
