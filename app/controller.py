@@ -1,7 +1,7 @@
 from .input_handler import read_user_input
 from actions import *
 import pysftp
-from actions import close, get_file_from_remote_server, get_multiple_files_from_remote_server
+from actions import close
 from actions import list_commands
 
 
