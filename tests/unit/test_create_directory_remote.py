@@ -30,7 +30,7 @@ def test_remote_create_directory_invalid(sftp,capsys):
 		Test to check if pysftp.mkdir can handle invalid directory names and 
 		empty string directory names.
 	"""
-	cases = ["http://www.google.com", "", ".", "/home"]
+	cases = ["http://www.google.com", "", ".", "/test_create_directory_invalid"]
 	for dir_test in cases:
 		# return type of pysftp rename function is None
 		assert mkdirectory.create_dir_remote(sftp, dir_test) is False
