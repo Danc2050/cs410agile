@@ -59,3 +59,4 @@ def test_some_good_files(sftp):
     assert get.get_multiple(sftp, files, len(files)) is True
 
     os.remove('test.txt')
+    os.remove('test2.txt')
