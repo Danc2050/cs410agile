@@ -3,6 +3,7 @@ def list_commands():
         # Note to developers: please sort alphabetically for ease of use
         # and please adjust spacing as needed.
         "bye\t\t\tclose the connection and exit\n"
+        "chmod mode path\t\tchange permissions of path to mode\n"
         "exit\t\t\tclose the connection and exit\n"
         "lls\t\t\tlist files on local machine\n"
         "lrename old new\t\trenames a file or folder from old to new\n"
