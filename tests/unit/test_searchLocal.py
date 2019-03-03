@@ -2,8 +2,8 @@ from actions import *
 
 def test_search_existing_file():
     flag = searchLocal("test")
-    assert True == flag
+    assert flag > 0
 
 def test_search_non_existant_file():
     flag = searchLocal("alkdsjhfasdklfhadshfaldksf")
-    assert False == flag
+    assert flag < 1

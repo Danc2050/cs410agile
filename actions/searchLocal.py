@@ -1,10 +1,9 @@
 # Search local Directory and subdirectories
 import os
 
-rootdir = os.getcwd()
-count = 0
-
 def searchLocal(name):
+    rootdir = os.getcwd()
+    count = 0
     for subdir, dirs, files in os.walk(rootdir):
         for file in files:
             filepath = subdir + os.sep + file
