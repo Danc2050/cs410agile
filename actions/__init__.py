@@ -2,10 +2,11 @@
 
 __all__ = [
     "close",
-    "put_file_onto_remote_server",
-    "list_files_local",
     "create_directory_on_remote",
+    "list_files_local",
     "list_files_remote",
+    "put_file_onto_remote_server",
+    "put_folder_on_remote_server",
     "rename_files_local",
-    "put_folder_on_remote_server"
+    "rename_file_remote"
 ]

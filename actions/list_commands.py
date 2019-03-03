@@ -11,6 +11,7 @@ def list_commands():
         "put file\t\tput a file onto server\n"
         "put -r folder\t\tput a folder onto server recursively\n"
         "quit\t\t\tclose the connection and exit\n"
+        "rename old new\t\trename file on remote server from old to new\n"
         # "rm file\t\t\tremove file\n"
     )
     return True
