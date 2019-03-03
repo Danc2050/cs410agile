@@ -25,7 +25,7 @@ def check_if_deletes_directory(sftp):
     of the same name doesn't remove the directory, then removes
     the directory
     """
-    pysftp.mkdir(sftp, REAL_FILE)
+    sftp.makedirs(REAL_FILE)
     assert rm.remove_from_remote_server(REAL_FILE) is False
-    pysftp.rmdir(sftp, REAL_FILE)
+    sftp.rmdir(REAL_FILE)
 
