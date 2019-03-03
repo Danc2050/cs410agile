@@ -9,7 +9,7 @@ def test_no_files(sftp, capsys):
     """
 
     files = ["totes.not.fake.no.really", "another.fake"]
-    assert get.get_multiple(sftp, files, len(files)) is False
+    assert get.get_multiple(sftp, files) is False
     assert get.ERROR_MESSAGE in capsys.readouterr().out
 
 
@@ -34,10 +34,31 @@ def test_best_case(sftp):
     sftp.put('test2.txt', 'test2.txt', preserve_mtime=False)
 
     # Test getting files
-    assert get.get_multiple(sftp, files, len(files)) is True
+    assert get.get_multiple(sftp, files) is True
 
     os.remove('test.txt')
     os.remove('test2.txt')
+
+
+def test_best_case_single(sftp):
+    """This tests what happens if you put a file that does exist on
+    to the remote server
+    """
+
+    files = ['test.txt']
+
+    # Create files locally
+    f = open('test.txt', 'w')
+    f.write('testing')
+    f.close()
+
+    # Put files on the remote server
+    sftp.put('test.txt', 'test.txt', preserve_mtime=False)
+
+    # Test getting files
+    assert get.get_multiple(sftp, files) is True
+
+    os.remove('test.txt')
 
 
 def test_some_good_files(sftp):
@@ -56,7 +77,7 @@ def test_some_good_files(sftp):
     sftp.put('test.txt', 'test.txt', preserve_mtime=False)
 
     # Test getting files
-    assert get.get_multiple(sftp, files, len(files)) is True
+    assert get.get_multiple(sftp, files) is True
 
     os.remove('test.txt')
     os.remove('test2.txt')
