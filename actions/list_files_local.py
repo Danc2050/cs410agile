@@ -1,18 +1,13 @@
-#import required modules
 import os
 
+
 def display_local_files():
-	"""
-        	Method to display the files in current directory.
-	"""
-	
-	#Path is set to current working directory
-	path='.'
+    """
+            Method to display the files in current directory.
+    """
 
+    for entry in os.listdir("."):
+        if not entry.startswith('.'):
+            print(entry, end='    ')
+    print()
 
-	for file in os.listdir(path):
-		if not file.startswith('.'):
-			print(file)
-
-
-	
