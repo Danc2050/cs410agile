@@ -5,7 +5,7 @@ import os
 FILE_NOT_FOUND_ERROR_MESSAGE = "Sorry, we couldn't find your file. Please check your spelling and try again"
 PERMISSION_ERROR_MESSAGE = "Sorry, you do not have permissions"
 IS_DIRECTORY_ERROR = "Sorry, but that file already exists as a directory"
-IO_ERROR_MESSAGE = "Sorry, there was an IO error"
+IO_ERROR_MESSAGE = "Sorry, we were unable to get your file"
 
 
 def get(sftp, remote_file_name):
@@ -33,6 +33,9 @@ def get(sftp, remote_file_name):
     except IsADirectoryError:
         print(IS_DIRECTORY_ERROR)
         return False
-    except IOError:
-        print(IO_ERROR_MESSAGE)
+    except IOError as e:
+        if e.strerror is None:
+            print(IO_ERROR_MESSAGE)
+        else:
+            print(e.strerror)
         return False
