@@ -4,7 +4,8 @@ import os
 
 FILE_NOT_FOUND_ERROR_MESSAGE = "Sorry, we couldn't find your file. Please check your spelling and try again"
 PERMISSION_ERROR_MESSAGE = "Sorry, you do not have permissions"
-IS_DIRECTORY_ERROR = "Sorry but that file already exists as a directory"
+IS_DIRECTORY_ERROR = "Sorry, but that file already exists as a directory"
+IO_ERROR_MESSAGE = "Sorry, there was an IO error"
 
 
 def get(sftp, remote_file_name):
@@ -21,6 +22,9 @@ def get(sftp, remote_file_name):
     try:
         sftp.get(remote_file_name, local_file_path, callback=None)
         return True
+    except IOError:
+        print(IO_ERROR_MESSAGE)
+        return False
     except FileNotFoundError:
         if not local_file_exists:  # Check to see if the file already exists locally or not
             os.remove(remote_file_name)  # Required because it will create the file locally if not found remotely

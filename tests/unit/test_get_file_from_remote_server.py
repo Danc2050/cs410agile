@@ -65,6 +65,21 @@ def test_local_dir_case(sftp):
     sftp.remove('test')
 
 
+def test_remote_dir_case(sftp):
+    """This tests what happens if you try to get a directory that exists
+    on the remote server
+    """
+
+    # Add directory to the remote server
+    sftp.makedirs('test')
+
+    # Test getting directory with get()
+    assert get.get(sftp, "test") is False
+
+    # Remove remote directory
+    sftp.rmdir('test')
+
+
 def test_no_permissions_case(sftp):
     """This tests what happens if you get a file that you don't have permissions
     to write
