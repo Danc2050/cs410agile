@@ -36,8 +36,13 @@ def test_best_case(sftp):
     # Test getting files
     assert get.get_multiple(sftp, files) is True
 
+    # Remove local files
     os.remove('test.txt')
     os.remove('test2.txt')
+
+    # Remove remote files
+    sftp.remove('test.txt')
+    sftp.remove('test2.txt')
 
 
 def test_best_case_single(sftp):
@@ -58,7 +63,11 @@ def test_best_case_single(sftp):
     # Test getting files
     assert get.get_multiple(sftp, files) is True
 
+    # Remove local files
     os.remove('test.txt')
+
+    # Remove remote files
+    sftp.remove('test.txt')
 
 
 def test_some_good_files(sftp):
@@ -79,5 +88,10 @@ def test_some_good_files(sftp):
     # Test getting files
     assert get.get_multiple(sftp, files) is True
 
+    # Remove local files
     os.remove('test.txt')
     os.remove('test2.txt')
+
+    # Remove remote files
+    sftp.remove('test.txt')
+    sftp.remove('test2.txt')
