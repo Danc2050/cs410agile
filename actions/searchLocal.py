@@ -15,4 +15,6 @@ def searchLocal(name):
             if file.startswith(name):
                 print(filepath)
                 count = count + 1
+    if count < 1:
+        print("File not found")
     return count

@@ -1,4 +1,4 @@
-from actions import *
+from actions.searchLocal import searchLocal
 
 def test_search_existing_file():
     flag = searchLocal("test")
