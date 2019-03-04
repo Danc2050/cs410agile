@@ -10,15 +10,15 @@ def test_no_file(sftp, capsys):
     """Test what happens when you ask to change the permissions on a
     file which doesn't exist.
     """
-    assert change.change_permissions(sftp, "totes.not.fake.no.really", PERMISSION) is False
-    assert change.ERROR_MESSAGE in capsys.readouterr().out
+    assert change.change_permissions(sftp, PERMISSION, "totes.not.fake.no.really") is False
+    assert change.ERROR_PREFIX in capsys.readouterr().out
 
 
 def test_restrictive_permissions_case(sftp):
     """This tests if you try to change permissions on something you shouldn't
     have access to
     """
-    assert change.change_permissions(sftp, "list_files_local", "/home") is False
+    assert change.change_permissions(sftp, PERMISSION, "/home") is False
     # try to modify and verify it won't do anything
 
 
