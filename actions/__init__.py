@@ -4,6 +4,7 @@ __all__ = [
     "close",
     "change_permissions_remote",
     "create_directory_on_remote",
+    "get_file_from_remote_server",
     "list_files_local",
     "list_files_remote",
     "put_file_onto_remote_server",
