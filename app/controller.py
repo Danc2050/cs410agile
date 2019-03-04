@@ -38,14 +38,10 @@ def main_loop(sftp: pysftp.Connection) -> int:
             if len(tokens) == 0:
                 continue
             elif len(tokens) == 1 and tokens[0].lower() == "ls":
-                # Barebones remote "ls" support to let us write meaningful
-                # tests of the basic skeleton.
-                # TODO Replace this action handler when implementing remote ls.
-                sftp.listdir(".")
+                list_files_remote.list_dir(sftp)
             elif len(tokens) == 2 and tokens[0] == "rm":
                 # Using "rm" as remove
                 remove_from_remote_server.remove_from_remote_server(sftp, tokens[1])
-                list_files_remote.list_dir(sftp)
             elif len(tokens) == 1 and tokens[0] == "?":
                 # If there is only one
                 list_commands.list_commands()
