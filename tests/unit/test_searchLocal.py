@@ -14,10 +14,12 @@ def test_no_permission_in_current_folder():
     os.mkdir("no_perm")
     os.chdir("no_perm")
     os.mkdir("a folder")
-    os.chmod(".", mode=222) # 333 allows write and execute, not read. 111 is very important...it allows us to
+    os.chmod(".", mode=222) # 222 is write only
     assert searchLocal("a folder") is 0 # the folder is not searchable, so return value should be 0
+    # Cleanup
+    os.rmdir("a folder")
     os.chdir("..")
-    shutil.rmtree("no_perm", True)
+    os.rmdir("no_perm")
 
 def test_no_permission_in_sub_folder():
     os.mkdir("perm")
