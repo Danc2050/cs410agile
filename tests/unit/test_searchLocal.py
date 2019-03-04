@@ -14,16 +14,16 @@ def test_no_permission_in_current_folder():
     os.mkdir("no_perm")
     os.chdir("no_perm")
     os.mkdir("a folder")
-    os.chmod(".", mode=111)
-    assert searchLocal("a folder") is 0 # the file will return
+    os.chmod(".", mode=222) # 333 allows write and execute, not read. 111 is very important...it allows us to
+    assert searchLocal("a folder") is 0 # the folder is not searchable, so return value should be 0
     os.chdir("..")
     shutil.rmtree("no_perm", True)
 
 def test_no_permission_in_sub_folder():
-    os.mkdir("permission")
-    os.chdir("permission")
-    os.mkdir("don't_search")
-    os.chdir("dont_search")
+    os.mkdir("perm")
+    os.chdir("perm")
+    os.mkdir("perm2")
+    os.chdir("perm2")
     os.mkdir("a folder")
     os.chdir("..")
     os.chmod("don't_search", mode=111)
