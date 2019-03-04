@@ -1,5 +1,6 @@
 import os
 from actions import get_file_from_remote_server as get
+from pathlib import Path
 
 
 def test_no_file(sftp, capsys):
@@ -27,4 +28,71 @@ def test_best_case(sftp):
     # Test getting file
     assert get.get(sftp, "test.txt") is True
 
+    # Remove local file
     os.remove('test.txt')
+
+    # Remove remote file
+    sftp.remove('test.txt')
+
+
+def test_local_dir_case(sftp):
+    """This tests what happens if you get a file that already exists
+    as a directory locally
+    """
+
+    # Create file locally
+    f = open('test', 'w')
+    f.write('testing')
+    f.close()
+
+    # Put file on the remote server
+    sftp.put('test', 'test', preserve_mtime=False)
+
+    # Remove local files
+    os.remove('test')
+
+    # Create directory locally
+    if not os.path.exists('test'):
+        os.makedirs('test')
+
+    # Test getting file
+    assert get.get(sftp, "test") is False
+
+    # Remove local directory
+    os.removedirs('test')
+
+    # Remove remote files
+    sftp.remove('test')
+
+
+def test_no_permissions_case(sftp):
+    """This tests what happens if you get a file that already exists
+    as a directory locally
+    """
+
+    # Create file locally
+    f = open('test', 'w')
+    f.write('testing')
+    f.close()
+
+    # Save directory path
+    path = Path().absolute()
+
+    # Put file on the remote server
+    sftp.put('test', 'test', preserve_mtime=False)
+
+    # Change current directory path
+    os.chdir('/')
+
+    # Test getting file
+    assert get.get(sftp, "test") is False
+
+    # Change back to most recent directory
+    os.chdir(path)
+
+    # Remove local files
+    os.remove('test')
+
+    # Remove remote files
+    sftp.remove('test')
+

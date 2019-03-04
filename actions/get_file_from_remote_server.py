@@ -2,7 +2,8 @@ import os
 
 # This gets a file from a remote server.
 
-ERROR_MESSAGE = "Sorry, we couldn't find your file. Please check your spelling and try again"
+FILE_NOT_FOUND_ERROR_MESSAGE = "Sorry, we couldn't find your file. Please check your spelling and try again"
+PERMISSION_ERROR_MESSAGE = "Sorry, you do not have permissions"
 
 
 def get(sftp, remote_file_name):
@@ -22,5 +23,8 @@ def get(sftp, remote_file_name):
     except FileNotFoundError:
         if not local_file_exists:  # Check to see if the file already exists locally or not
             os.remove(remote_file_name)  # Required because it will create the file locally if not found remotely
-        print(ERROR_MESSAGE)
+        print(FILE_NOT_FOUND_ERROR_MESSAGE)
+        return False
+    except PermissionError:
+        print(PERMISSION_ERROR_MESSAGE)
         return False
