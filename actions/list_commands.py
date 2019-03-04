@@ -10,7 +10,7 @@ def list_commands():
         "ls\t\t\tlist files on remote machine\n"
         "mkdir dir\t\tcreate a directory named dir on remote server\n"
         "put file\t\tput a file onto server\n"
-        "mput file file ...\t\tputs multiple files onto server\n"
+        "mput file file ...\tputs multiple files onto server\n"
         "put -r folder\t\tput a folder onto server recursively\n"
         "get file\t\tget a file from the server\n"
         "quit\t\t\tclose the connection and exit\n"
