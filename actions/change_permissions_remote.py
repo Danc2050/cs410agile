@@ -1,14 +1,16 @@
 import pysftp
 
-
-ERROR_MESSAGE = "Can not change permissions. No such file exists"
-
+ERROR_PREFIX = "Error:"
+ERROR_MESSAGE = "Unable to change permissions."
 
 def change_permissions(sftp, permission, filename):
     try:
         sftp.chmod(filename, permission)
         return True
 
-    except IOError:
-        print(ERROR_MESSAGE)
+    except OSError as e:
+        if e.strerror is None:
+            print(ERROR_PREFIX, ERROR_MESSAGE)
+        else:
+            print(ERROR_PREFIX, e.strerror)
         return False

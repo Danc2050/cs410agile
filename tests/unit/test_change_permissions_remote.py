@@ -18,13 +18,13 @@ def test_restrictive_permissions_case(sftp):
     """This tests if you try to change permissions on something you shouldn't
     have access to
     """
-    assert change.change_permissions(sftp, "/home", PERMISSION) is False
+    assert change.change_permissions(sftp, "list_files_local", "/home") is False
     # try to modify and verify it won't do anything
 
 
 def test_allowing_permissions_case(sftp):
     filename = "testAllowingPermissionCaseSnuggleKittens"
     sftp.open(filename, "a").close()
-    assert change.change_permissions(sftp, filename, PERMISSION) is True
+    assert change.change_permissions(sftp, PERMISSION, filename) is True
     # try to modify and verify it will do something!
     sftp.remove(filename)
