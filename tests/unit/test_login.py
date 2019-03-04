@@ -23,8 +23,8 @@ def test_login_with_invalid_credentials(capsys):
     #
     #   (host, username, password)
     test_cases = [
-        (None, None, None),
-        ("", "", ""),
+        #(None, None, None),
+        #("", "", ""),
         ("Fake", "Fake", "Fake"),
         (HOSTNAME, "Fake", "Fake"),
         (HOSTNAME, "cs510andrew", "zFa8FkS7CC7eG8fx"),  # Using Anthony's PW
