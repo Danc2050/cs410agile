@@ -39,6 +39,9 @@ def main_loop(sftp: pysftp.Connection) -> int:
                 continue
             elif len(tokens) == 1 and tokens[0].lower() == "ls":
                 list_files_remote.list_dir(sftp)
+            elif len(tokens) == 2 and tokens[0] == "rm":
+                # Using "rm" as remove
+                remove_from_remote_server.remove_from_remote_server(sftp, tokens[1])
             elif len(tokens) == 1 and tokens[0] == "?":
                 # If there is only one
                 list_commands.list_commands()
