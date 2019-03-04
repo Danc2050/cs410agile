@@ -9,7 +9,7 @@ def test_no_file(sftp, capsys):
     """
 
     assert get.get(sftp, "totes.not.fake.no.really") is False
-    assert get.ERROR_MESSAGE in capsys.readouterr().out
+    assert get.FILE_NOT_FOUND_ERROR_MESSAGE in capsys.readouterr().out
 
 
 def test_best_case(sftp):
