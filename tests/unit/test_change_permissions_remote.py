@@ -14,11 +14,12 @@ def test_no_file(sftp, capsys):
     assert change.ERROR_PREFIX in capsys.readouterr().out
 
 
-def test_restrictive_permissions_case(sftp):
+def test_restrictive_permissions_case(sftp, capsys):
     """This tests if you try to change permissions on something you shouldn't
     have access to
     """
     assert change.change_permissions(sftp, PERMISSION, "/home") is False
+    assert change.ERROR_PREFIX in capsys.readouterr().out
     # try to modify and verify it won't do anything
 
 
