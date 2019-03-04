@@ -22,9 +22,6 @@ def get(sftp, remote_file_name):
     try:
         sftp.get(remote_file_name, local_file_path, callback=None)
         return True
-    except IOError:
-        print(IO_ERROR_MESSAGE)
-        return False
     except FileNotFoundError:
         if not local_file_exists:  # Check to see if the file already exists locally or not
             os.remove(remote_file_name)  # Required because it will create the file locally if not found remotely
@@ -35,4 +32,7 @@ def get(sftp, remote_file_name):
         return False
     except IsADirectoryError:
         print(IS_DIRECTORY_ERROR)
+        return False
+    except IOError:
+        print(IO_ERROR_MESSAGE)
         return False
