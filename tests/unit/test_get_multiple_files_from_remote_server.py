@@ -90,8 +90,6 @@ def test_some_good_files(sftp):
 
     # Remove local files
     os.remove('test.txt')
-    os.remove('test2.txt')
 
     # Remove remote files
     sftp.remove('test.txt')
-    sftp.remove('test2.txt')
