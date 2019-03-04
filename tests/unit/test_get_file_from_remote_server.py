@@ -66,8 +66,8 @@ def test_local_dir_case(sftp):
 
 
 def test_no_permissions_case(sftp):
-    """This tests what happens if you get a file that already exists
-    as a directory locally
+    """This tests what happens if you get a file that you don't have permissions
+    to write
     """
 
     # Create file locally
