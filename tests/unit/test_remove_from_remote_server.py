@@ -1,5 +1,6 @@
 from actions import remove_from_remote_server as rm
 from actions import put_file_onto_remote_server as put
+import os
 import pysftp
 
 TEST_FILE_ONE = "test.txt"
@@ -8,8 +9,8 @@ FAKE_FILE = "sadnessForever.txt"
 
 
 def test_remove_item_that_exists(sftp):
-    sftp.open(TEST_FILE_ONE, "a").close()
-    put(sftp, TEST_FILE_ONE)
+    open(TEST_FILE_ONE, "a").close()
+    put.put(sftp, TEST_FILE_ONE)
     assert rm.remove_from_remote_server(sftp, TEST_FILE_ONE) is True
 
 
@@ -19,7 +20,7 @@ def test_remove_item_that_does_not_exist(sftp, capsys):
     confirms the function doesn't remove it
     """
     assert rm.remove_from_remote_server(sftp, FAKE_FILE) is False
-    assert put.ERROR_MESSAGE in capsys.readouterr().out
+    assert rm.ERROR_PREFIX in capsys.readouterr().out
 
 
 def test_check_if_deletes_directory(sftp):
@@ -27,7 +28,7 @@ def test_check_if_deletes_directory(sftp):
     of the same name doesn't remove the directory, then removes
     the directory
     """
-    sftp.makedirs(TEST_FILE_TWO)
+    os.makedirs(TEST_FILE_TWO)
     assert rm.remove_from_remote_server(sftp, TEST_FILE_TWO) is False
-    sftp.rmdir(TEST_FILE_TWO)
+    os.rmdir(TEST_FILE_TWO)
 
