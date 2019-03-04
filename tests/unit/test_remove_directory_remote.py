@@ -18,7 +18,7 @@ def test_remote_remove_directory(sftp):
 	sftp.makedirs(dir_test)
 
 	#Delete it
-	rmdirectory.remove_dir_remote(sftp, dir_test)
+	assert rmdirectory.remove_dir_remote(sftp, dir_test) is True
 
 	# Check if dir_test is deleted on remote server
 	assert sftp.isdir(dir_test) is False
