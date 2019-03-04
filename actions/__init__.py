@@ -2,6 +2,7 @@
 
 __all__ = [
     "close",
+    "change_permissions_remote",
     "create_directory_on_remote",
     "list_files_local",
     "list_files_remote",

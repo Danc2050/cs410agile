@@ -47,6 +47,9 @@ def main_loop(sftp: pysftp.Connection) -> int:
                 list_commands.list_commands()
             elif len(tokens) == 1 and tokens[0].lower() == "lls":
                 list_files_local.display_local_files()
+            elif len(tokens) == 3 and tokens[0].lower() == "chmod":
+                # Change Permissions
+                change_permissions_remote.change_permissions(sftp, tokens[1], tokens[2])
             elif len(tokens) == 2 and tokens[0] == "put":
                 put_file_onto_remote_server.put(sftp, tokens[1])
             elif len(tokens) == 3 and tokens[0] == "rename":
