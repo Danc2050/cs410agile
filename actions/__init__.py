@@ -12,6 +12,9 @@ __all__ = [
     "remove_directory_on_remote",
     "remove_from_remote_server",
     "rename_files_local",
+    "list_files_local",
+    "put_folder_on_remote_server",
+    "put_multiple_files_onto_remote_server",
     "rename_file_remote"
 ]
 
