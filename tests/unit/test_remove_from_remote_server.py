@@ -18,7 +18,7 @@ def test_remove_item_that_does_not_exist(sftp, capsys):
     this asks to remove a thing which isn't a file, and
     confirms the function doesn't remove it
     """
-    assert rm.remove_from_remote_server(FAKE_FILE) is False
+    assert rm.remove_from_remote_server(sftp, FAKE_FILE) is False
     assert put.ERROR_MESSAGE in capsys.readouterr().out
 
 
