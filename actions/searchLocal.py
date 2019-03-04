@@ -5,6 +5,11 @@ def searchLocal(name):
     rootdir = os.getcwd()
     count = 0
     for subdir, dirs, files in os.walk(rootdir):
+        filepath = subdir + os.sep
+        for dir in dirs:
+            if dir.endswith(name):
+                print(filepath + dir)
+                count = count + 1
         for file in files:
             filepath = subdir + os.sep + file
             if file.startswith(name):
