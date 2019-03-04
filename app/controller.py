@@ -39,13 +39,21 @@ def main_loop(sftp: pysftp.Connection) -> int:
                 continue
             elif len(tokens) == 1 and tokens[0].lower() == "ls":
                 list_files_remote.list_dir(sftp)
+            elif len(tokens) == 2 and tokens[0] == "rm":
+                # Using "rm" as remove
+                remove_from_remote_server.remove_from_remote_server(sftp, tokens[1])
             elif len(tokens) == 1 and tokens[0] == "?":
                 # If there is only one
                 list_commands.list_commands()
             elif len(tokens) == 1 and tokens[0].lower() == "lls":
                 list_files_local.display_local_files()
+            elif len(tokens) == 3 and tokens[0].lower() == "chmod":
+                # Change Permissions
+                change_permissions_remote.change_permissions(sftp, tokens[1], tokens[2])
             elif len(tokens) == 2 and tokens[0] == "put":
                 put_file_onto_remote_server.put(sftp, tokens[1])
+            elif len(tokens) == 2 and tokens[0] == "get":
+                get_file_from_remote_server.get(sftp, tokens[1])
             elif len(tokens) == 3 and tokens[0] == "rename":
                 rename_file_remote.rename_remote_file(sftp, tokens[1], tokens[2])
             elif len(tokens) == 2 and tokens[0] == "mkdir":
@@ -56,6 +64,8 @@ def main_loop(sftp: pysftp.Connection) -> int:
                 put_folder_on_remote_server.put_r(sftp, tokens[2])
             elif len(tokens) >= 2 and tokens[0] == "mput":
                 put_multiple_files_onto_remote_server.put_multiple(sftp, tokens[1:])
+            elif len(tokens) == 2 and tokens[0] == "rmdir":
+                remove_directory_on_remote.remove_dir_remote(sftp, tokens[1])
             elif len(tokens) == 1 \
                     and (tokens[0].lower() == "exit"
                          or tokens[0].lower() == "bye"
