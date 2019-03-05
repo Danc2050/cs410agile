@@ -1,6 +1,7 @@
 import os
-
-from actions import get_multiple_files_from_remote_server as get
+import pysftp
+from actions import get_multiple_files_from_remote_server as mget, \
+    get_file_from_remote_server as get
 
 
 def test_no_files(sftp, capsys):
@@ -9,8 +10,8 @@ def test_no_files(sftp, capsys):
     """
 
     files = ["totes.not.fake.no.really", "another.fake"]
-    assert get.get_multiple(sftp, files) is False
-    assert get.ERROR_MESSAGE in capsys.readouterr().out
+    assert mget.get_multiple(sftp, files) is False
+    assert mget.ERROR_MESSAGE in capsys.readouterr().out
 
 
 def test_best_case(sftp):
@@ -34,7 +35,7 @@ def test_best_case(sftp):
     sftp.put('test2.txt', 'test2.txt', preserve_mtime=False)
 
     # Test getting files
-    assert get.get_multiple(sftp, files) is True
+    assert mget.get_multiple(sftp, files) is True
 
     # Remove local files
     os.remove('test.txt')
@@ -61,7 +62,7 @@ def test_best_case_single(sftp):
     sftp.put('test.txt', 'test.txt', preserve_mtime=False)
 
     # Test getting files
-    assert get.get_multiple(sftp, files) is True
+    assert mget.get_multiple(sftp, files) is True
 
     # Remove local files
     os.remove('test.txt')
@@ -86,10 +87,38 @@ def test_some_good_files(sftp):
     sftp.put('test.txt', 'test.txt', preserve_mtime=False)
 
     # Test getting files
-    assert get.get_multiple(sftp, files) is True
+    assert mget.get_multiple(sftp, files) is True
 
     # Remove local files
     os.remove('test.txt')
 
     # Remove remote files
     sftp.remove('test.txt')
+
+def test_mget_catches_exceptions(sftp, capsys, monkeypatch):
+    """This test verifies that the get_multiple action correctly catches
+    OSError exceptions that get might raise and continues on.
+    """
+
+    # List of files that should succeed
+    goodFiles = ["mget_good", "mget_great"]
+
+    # List of files to attempt to mget, in the pattern: badfile, goodfile, ...
+    files = ["mget_bad", "mget_good", "mget_fail", "mget_great"]
+
+    def mock_get(sftp: pysftp.Connection, filename: str):
+        """A mocked put() function that prints good filenames so we can
+        test against them and raises OSErrors for bad filenames so we can be
+        sure they're caught."""
+        if filename in goodFiles:
+            print(filename)
+        else:
+            raise OSError("mock_get: filename = " + filename)
+
+    monkeypatch.setattr(get, "get", mock_get)
+
+    mget.get_multiple(sftp, files)
+
+    output = capsys.readouterr().out
+    for file in files:
+        assert file in output
