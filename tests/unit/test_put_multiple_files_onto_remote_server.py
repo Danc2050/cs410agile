@@ -88,14 +88,7 @@ def test_mput_catches_exceptions(sftp, capsys, monkeypatch):
     # List of files that should succeed
     goodFiles = ["mput_good", "mput_great"]
 
-    # List of files that should fail
-    badFiles = ["mput_bad", "mput_fail"]
-
-    # List of files to attempt to mput
-    # Note: there are ways to programmatically combine this, but none
-    # simple enough to be worth the effort for this test.
-    # The important part is that they're interleaved in the pattern
-    # bad, good, bad, good.
+    # List of files to attempt to mput, in the pattern: badfile, goodfile, ...
     files = ["mput_bad", "mput_good", "mput_fail", "mput_great"]
 
     # Create the good files
