@@ -2,7 +2,7 @@
 import os
 
 
-def searchLocal(name):
+def search_local_files(name):
     rootdir = os.getcwd()
     count = 0
     for subdir, dirs, files in os.walk(rootdir):

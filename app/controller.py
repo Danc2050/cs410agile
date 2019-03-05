@@ -63,7 +63,7 @@ def main_loop(sftp: pysftp.Connection) -> int:
             elif len(tokens) == 3 and tokens[0] == "put" and tokens[1] == "-r":
                 put_folder_on_remote_server.put_r(sftp, tokens[2])
             elif len(tokens) == 2 and tokens[0] == "lsearch":
-                search_local_files.searchLocal(tokens[1])
+                search_local_files.search_local_files(tokens[1])
             elif len(tokens) >= 2 and tokens[0] == "mget":
                 get_multiple_files_from_remote_server.get_multiple(sftp, tokens[1:])
             elif len(tokens) >= 2 and tokens[0] == "mput":
