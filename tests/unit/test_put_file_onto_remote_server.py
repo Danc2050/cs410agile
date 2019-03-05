@@ -11,8 +11,9 @@ def test_no_file(sftp, capsys):
     file which doesn't exist.
     """
 
-    with pytest.raises(OSError):
-        put.put(sftp, "totes.not.fake.no.really")
+    assert put.put(sftp, "totes.not.fake.no.really") is False
+    assert put.FILE_NOT_FOUND_ERROR_MESSAGE in capsys.readouterr().out
+
 
 
 def test_best_case(sftp):
