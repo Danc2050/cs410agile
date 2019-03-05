@@ -91,10 +91,6 @@ def test_mput_catches_exceptions(sftp, capsys, monkeypatch):
     # List of files to attempt to mput, in the pattern: badfile, goodfile, ...
     files = ["mput_bad", "mput_good", "mput_fail", "mput_great"]
 
-    # Create the good files
-    for file in goodFiles:
-        open(file, "a").close()
-
     def mock_put(sftp: pysftp.Connection, filename: str):
         """A mocked put() function that prints good filenames so we can
         test against them and raises OSErrors for bad filenames so we can be
@@ -111,7 +107,3 @@ def test_mput_catches_exceptions(sftp, capsys, monkeypatch):
     output = capsys.readouterr().out
     for file in files:
         assert file in output
-
-    # Clean up the files we created
-    for file in goodFiles:
-        os.remove(file)
