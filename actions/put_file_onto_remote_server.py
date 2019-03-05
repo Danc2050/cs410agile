@@ -1,17 +1,21 @@
 import pysftp
+import os
 
-# this puts a file onto a remote server, The preserve mtime = true
+# This puts a file onto a remote server, the preserve mtime = true
 # will make sure that the modification times on the server copy match those
-# on the local machine
+# on the local machine.
 
-FOLDER_CONFLICT_ERROR_MESSAGE = \
-    "A folder by that name already exists."
+FOLDER_CONFLICT_ERROR_MESSAGE = "A folder by that name already exists."
+FILE_NOT_FOUND_ERROR_MESSAGE = "Sorry, we couldn't find your file. Please check your spelling and try again"
 
 
 def put(sftp: pysftp.Connection, filename: str):
     try:
-        sftp.put(filename, filename, preserve_mtime=False)
+        sftp.put(filename, os.path.basename(filename), preserve_mtime=False)
         return True
+    except FileNotFoundError:
+        print("Error:", FILE_NOT_FOUND_ERROR_MESSAGE)
+        return False
     except OSError:
         if sftp.isdir(filename):
             # The file  we want to upload is a directory on remote.
