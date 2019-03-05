@@ -52,23 +52,37 @@ def test_correct_tokenization():
 
         # Case: one escaped-space multi-word file name.
         [r"Filename\ with\ escaped\ spaces",
-            [r"Filename\ with\ escaped\ spaces"]],
+            [r"Filename with escaped spaces"]],
 
         # Case: one double-quoted multi-word file name.
         ['"Filename with double quotes"',
-            ['"Filename with double quotes"']],
+            ['Filename with double quotes']],
 
         # Case: one single-quoted multi-word file name.
         ["'Filename with single quotes'",
-            ["'Filename with single quotes'"]],
+            ["Filename with single quotes"]],
 
         # Case: multi-word filenames, one of each.
         [r'''"File 1.png" 'File 2.png' File\ 3.png''',
-            ['"File 1.png"', "'File 2.png'", r"File\ 3.png"]],
+            ['File 1.png', "File 2.png", r"File 3.png"]],
 
         # Case: whitespace.
         ["   file   edit   tools  ",
-            ["file", "edit", "tools"]]
+            ["file", "edit", "tools"]],
+
+        # Cases: escaped quotes.
+        [r'\"',
+            ['"']],
+        [r"\'",
+            ["'"]],
+
+        # Cases: escaped quotes in other settings.
+        [r"'\'a'",      # '\'a' -> 'a
+            ["'a"]],
+        [r'"\"a"',      # "\"a" -> "a
+            ['"a']],
+        [r'''"Hello\" asdf" "what " " and "''',
+            ['Hello" asdf', 'what ', ' and ']]
     ]
 
     for input_string, tokens in test_cases:
