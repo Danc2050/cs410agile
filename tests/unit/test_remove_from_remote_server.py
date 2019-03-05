@@ -12,6 +12,7 @@ def test_remove_item_that_exists(sftp):
     open(TEST_FILE_ONE, "a").close()
     put.put(sftp, TEST_FILE_ONE)
     assert rm.remove_from_remote_server(sftp, TEST_FILE_ONE) is True
+    os.remove(TEST_FILE_ONE)
 
 
 def test_remove_item_that_does_not_exist(sftp, capsys):
