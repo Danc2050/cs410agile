@@ -1,4 +1,5 @@
 import pysftp
+import os
 
 # This puts a file onto a remote server, the preserve mtime = true
 # will make sure that the modification times on the server copy match those
@@ -10,7 +11,7 @@ FILE_NOT_FOUND_ERROR_MESSAGE = "Sorry, we couldn't find your file. Please check 
 
 def put(sftp: pysftp.Connection, filename: str):
     try:
-        sftp.put(filename, filename, preserve_mtime=False)
+        sftp.put(filename, os.path.basename(filename), preserve_mtime=False)
         return True
     except FileNotFoundError:
         print("Error:", FILE_NOT_FOUND_ERROR_MESSAGE)
