@@ -62,6 +62,8 @@ def main_loop(sftp: pysftp.Connection) -> int:
                 rename_files_local.rename_local_file(tokens[1], tokens[2])
             elif len(tokens) == 3 and tokens[0] == "put" and tokens[1] == "-r":
                 put_folder_on_remote_server.put_r(sftp, tokens[2])
+            elif len(tokens) >= 2 and tokens[0] == "mget":
+                get_multiple_files_from_remote_server.get_multiple(sftp, tokens[1:])
             elif len(tokens) >= 2 and tokens[0] == "mput":
                 put_multiple_files_onto_remote_server.put_multiple(sftp, tokens[1:])
             elif len(tokens) == 2 and tokens[0] == "rmdir":
