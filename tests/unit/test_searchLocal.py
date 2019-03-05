@@ -1,4 +1,4 @@
-from actions.searchLocal import searchLocal
+from actions.search_local_files import searchLocal
 import os
 
 

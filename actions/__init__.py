@@ -16,6 +16,6 @@ __all__ = [
     "remove_from_remote_server",
     "rename_file_remote",
     "rename_files_local",
-    "searchLocal"
+    "search_local_files.py"
 ]
 
