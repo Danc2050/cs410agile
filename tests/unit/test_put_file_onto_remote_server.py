@@ -14,19 +14,20 @@ def test_no_file(sftp, capsys):
 
 def test_put_file_with_absolute_path(sftp, capsys):
     """Test what happens when you ask to transfer a
-    file which doesn't exist.
+    file via absolute path.
     """
     test_dir="folder1/folder2"
     file_test = "file_test.txt"
+    local_file_path = os.path.abspath(os.path.join(test_dir, file_test))
     os.makedirs(test_dir)
-    open(test_dir + '/' + file_test, 'a').close()
+    open(local_file_path, 'a').close()
 
-    assert put.put(sftp, test_dir + '/' + file_test) is True
+    assert put.put(sftp, local_file_path) is True
     assert sftp.isfile(file_test) is True
 
     sftp.remove(file_test) 
 
-    os.remove(test_dir + '/' + file_test)
+    os.remove(local_file_path)
     os.removedirs(test_dir)
 
 
