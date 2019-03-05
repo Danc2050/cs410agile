@@ -9,7 +9,7 @@ def list_commands():
         "lls\t\t\tlist files on local machine\n"
         "lrename old new\t\trenames a file or folder from old to new\n"
         "ls\t\t\tlist files on remote machine\n"
-        "mget file file ...\t\tgets multiple files from the server\n"
+        "mget file file ...\tgets multiple files from the server\n"
         "mkdir dir\t\tcreate a directory named dir on remote server\n"
         "mput file file ...\tputs multiple files onto server\n"
         "put file\t\tput a file onto server\n"
