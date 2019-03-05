@@ -12,13 +12,18 @@ def put_multiple(sftp: pysftp.Connection, filenames: []):
     success = False
 
     for filename in filenames:
-        ret = put.put(sftp, filename)
-        if not ret:
-            print("filename in question:" + filename)
-            print()
-            continue
-        else:
-            success = True
+        # Print a header, without the newline
+        print("Putting " + filename + ": ", end="")
+        try:
+            if put.put(sftp, filename):
+                print("OK")
+                success = True
+            # Else, put() printed an error message.
+        except OSError as e:
+            if e.strerror is None:
+                print("Couldn't put file.")
+            else:
+                print(e.strerror)
 
     return success
 
