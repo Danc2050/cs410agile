@@ -4,7 +4,7 @@ Python 3 SFTP client for our CS410/510 - Agile Software Development
 
 ## Running the client
 
-To run the client from the terminal, run: python3 main.py
+To run the client from the terminal, run: python3 main.py username@host
 
 ## Running the tests
 
