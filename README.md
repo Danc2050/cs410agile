@@ -3,11 +3,18 @@
 Python 3 SFTP client for our CS410/510 - Agile Software Development at Portland State University.
 
 ## Contributors
-Shweta Paliwal <spaliwal@pdx.edu>;
-Molly Shove <mshove@pdx.edu>;
-Daniel Connelly <danc2@pdx.edu>;
-Andrew Wyatt <wyat2@pdx.edu>;
-Anthony Namba <anamba@pdx.edu>.
+
+Shweta Paliwal <spaliwal@pdx.edu>
+
+Molly Shove <mshove@pdx.edu>
+
+Daniel Connelly <danc2@pdx.edu>
+
+Dylan Laufenberg <lauf@pdx.edu>
+
+Andrew Wyatt <wyat2@pdx.edu>
+
+Anthony Namba <anamba@pdx.edu>
 
 ## Running the client
 
